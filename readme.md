@@ -17,4 +17,4 @@ This Client fetches a videogames catalog where you can see prices, newest ones a
 - **RxSwift**: Implementation of reactive patterns in app ([https://github.com/ReactiveX/RxSwift]())
 
 
-![https://github.com/bolivarbryan/GameCatalog/blob/master/fetchGamesDiagram.png]()
+![https://github.com/bolivarbryan/GameCatalog/blob/master/fetchGamesDiagram.png?raw=true]()
