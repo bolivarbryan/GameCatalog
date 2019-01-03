@@ -15,3 +15,6 @@ This Client fetches a videogames catalog where you can see prices, newest ones a
 - **Moya**: Used for creating a Networking layer ([https://github.com/Moya/Moya]())
 - **Kingfisher**: Image dowloader client ([https://github.com/onevcat/Kingfisher]())
 - **RxSwift**: Implementation of reactive patterns in app ([https://github.com/ReactiveX/RxSwift]())
+
+
+![https://github.com/bolivarbryan/GameCatalog/blob/master/fetchGamesDiagram.png]()
