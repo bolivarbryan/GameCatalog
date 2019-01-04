@@ -10,10 +10,10 @@ This Client fetches a videogames catalog where you can see prices, newest ones a
 - Included **CoreData** as Persistency Manager
 - Using XCTest for Unit Tests
 
-## Dependencies
+## Dependencies (Using CocoaPods)
 - **SnapKit**: Used for Programatic Layout Design ([http://snapkit.io/]())
 - **Moya**: Used for creating a Networking layer ([https://github.com/Moya/Moya]())
-- **Kingfisher**: Image dowloader client ([https://github.com/onevcat/Kingfisher]())
+- **Kingfisher**: Image dowloader client ([https://github.com/onevcat/Kingfisher]([https://github.com/onevcat/Kingfisher))
 - **RxSwift**: Implementation of reactive patterns in app ([https://github.com/ReactiveX/RxSwift]())
 
 ## Flow Diagram
