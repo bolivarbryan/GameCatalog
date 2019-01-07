@@ -1,0 +1,6 @@
+version: "Apple Swift version 4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
+options: "7c93e7b628f3ec4254f22b4347e4deac"
+build_time: [1546901466, 624445000]
+inputs:
+  "/Users/bryanabolivarm/projects/GameCatalog/GameCatalog/ViewController.swift": [9223372036, 854775807]
+  "/Users/bryanabolivarm/projects/GameCatalog/GameCatalog/AppDelegate.swift": [9223372036, 854775807]

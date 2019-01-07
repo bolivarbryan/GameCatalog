@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  GameCatalog
-//
-//  Created by Bryan A Bolivar M on 1/3/19.
-//  Copyright © 2019 Dev. All rights reserved.
-//
-
 import UIKit
 import CoreData
 
