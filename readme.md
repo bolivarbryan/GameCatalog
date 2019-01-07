@@ -22,7 +22,7 @@ This Client fetches a videogames catalog where you can see prices, newest ones a
 
 ## Checklist
 
-- [ ] Design App Architecture
+- [x] Design App Architecture
 - [ ] Create XCode Project
 - [ ] Install Dependencies
 - [ ] Organize project structure
