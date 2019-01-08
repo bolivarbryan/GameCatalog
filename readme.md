@@ -30,8 +30,8 @@ This Client fetches a videogames catalog where you can see prices, newest ones a
 - [x] Create Networking Layer
 - [ ] Create Game List Controller with Layout
 - [ ] (**GameList, Data Persistence**) Connect Database with View Model Controller & Test
-- [ ] (**GameList, Networking layer**) Connect Networking layer with Database and update once data is fetched
-- [ ] (**GameList**) Implement Filtering by Specific Game Brand
+- [x] (**GameList, Networking layer**) Connect Networking layer with Database and update once data is fetched
+- [x] (**GameList**) Implement Filtering by Specific Game Brand
 - [ ] Create Game Details View Controller with Layout
 - [ ] (**GameDetails**) Connect ViewModel With Controller
 - [ ] (**GameDetails, Optional**) Integrate Share Game
