@@ -43,6 +43,7 @@ class GameListViewModel {
     func buildUniverseListFromGames() {
         filteredGames.asObservable()
             .map ({ $0.map({ game in game.universe }) })
+            .map ({Array(Set($0))})
             .map({
                 var universesObject = [GameListViewModel.allUniversesKey]
                 universesObject.append(contentsOf: $0)
