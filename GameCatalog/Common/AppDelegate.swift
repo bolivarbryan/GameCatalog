@@ -7,7 +7,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.backgroundColor = .black
+        window?.makeKeyAndVisible()
+
+        let vc = GameListViewController()
+        let nc = UINavigationController(rootViewController: vc)
+        nc.isNavigationBarHidden = true
+        window?.rootViewController = nc
+
         return true
     }
 

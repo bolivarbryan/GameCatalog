@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 struct Game: Codable {
     let objectID, name, createdAt, updatedAt: String
@@ -9,10 +10,9 @@ struct Game: Codable {
     let universe, kind: String
 
     enum CodingKeys: String, CodingKey {
+        case name, createdAt, updatedAt, price, imageURL, popular, rating, downloads, description, universe, kind
         case objectID = "objectId"
-        case name, createdAt, updatedAt, price, imageURL, popular, rating, downloads, description
         case sku = "SKU"
-        case universe, kind
     }
 }
 
