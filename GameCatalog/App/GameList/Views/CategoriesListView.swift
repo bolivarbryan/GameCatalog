@@ -60,8 +60,8 @@ class CategoriesListView: UIView {
         collectionView = UICollectionView(frame: cellFrame,
                                           collectionViewLayout: collectionViewLayout)
 
-        collectionView.register(GridCollectionViewCell.self,
-                                forCellWithReuseIdentifier: GridCollectionViewCell.idenfifier)
+        collectionView.register(CategoryCollectionViewCell.self,
+                                forCellWithReuseIdentifier: CategoryCollectionViewCell.idenfifier)
 
         addSubview(collectionView)
 
@@ -71,8 +71,8 @@ class CategoriesListView: UIView {
 
         //Rx
         categories.asObservable()
-            .bind(to: collectionView.rx.items(cellIdentifier: GridCollectionViewCell.idenfifier,
-                                              cellType: GridCollectionViewCell.self)) {  row, element, cell in
+            .bind(to: collectionView.rx.items(cellIdentifier: CategoryCollectionViewCell.idenfifier,
+                                              cellType: CategoryCollectionViewCell.self)) {  row, element, cell in
                                                 cell.value.value = element
             }
             .disposed(by: bag)

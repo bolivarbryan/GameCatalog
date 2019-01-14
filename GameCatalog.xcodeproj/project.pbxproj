@@ -25,7 +25,7 @@
 		F4618DDD21E68AD100997431 /* GCLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4618DDC21E68AD100997431 /* GCLabel.swift */; };
 		F4618DDF21E6928000997431 /* CategoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4618DDE21E6928000997431 /* CategoriesListView.swift */; };
 		F4618DE121E6944900997431 /* GCStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4618DE021E6944900997431 /* GCStyleKit.swift */; };
-		F4618DE621E6ADC400997431 /* GridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4618DE521E6ADC400997431 /* GridCollectionViewCell.swift */; };
+		F4618DE621E6ADC400997431 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4618DE521E6ADC400997431 /* CategoryCollectionViewCell.swift */; };
 		F4618DE921E6B38C00997431 /* GamesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4618DE821E6B38C00997431 /* GamesListView.swift */; };
 		F462111921DEC63E00FA02DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F462111821DEC63E00FA02DB /* AppDelegate.swift */; };
 		F462112121DEC63E00FA02DB /* GameCatalog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F462111F21DEC63E00FA02DB /* GameCatalog.xcdatamodeld */; };
@@ -76,7 +76,7 @@
 		F4618DDC21E68AD100997431 /* GCLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCLabel.swift; sourceTree = "<group>"; };
 		F4618DDE21E6928000997431 /* CategoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListView.swift; sourceTree = "<group>"; };
 		F4618DE021E6944900997431 /* GCStyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCStyleKit.swift; sourceTree = "<group>"; };
-		F4618DE521E6ADC400997431 /* GridCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewCell.swift; sourceTree = "<group>"; };
+		F4618DE521E6ADC400997431 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		F4618DE821E6B38C00997431 /* GamesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesListView.swift; sourceTree = "<group>"; };
 		F462111521DEC63E00FA02DB /* GameCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F462111821DEC63E00FA02DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 				F446FAF121E93A4D0040815C /* GameCollectionViewCell.swift */,
 				F470EEAC21EC0C9500035387 /* GameListItem.swift */,
 				F4618DE821E6B38C00997431 /* GamesListView.swift */,
-				F4618DE521E6ADC400997431 /* GridCollectionViewCell.swift */,
+				F4618DE521E6ADC400997431 /* CategoryCollectionViewCell.swift */,
 				F4618DDA21E685FE00997431 /* HeaderView.swift */,
 			);
 			path = Views;
@@ -575,7 +575,7 @@
 				F4298A6E21E54BC200A306E6 /* GameListViewController.swift in Sources */,
 				F4298A6921E41AFA00A306E6 /* API.swift in Sources */,
 				F446FAF221E93A4D0040815C /* GameCollectionViewCell.swift in Sources */,
-				F4618DE621E6ADC400997431 /* GridCollectionViewCell.swift in Sources */,
+				F4618DE621E6ADC400997431 /* CategoryCollectionViewCell.swift in Sources */,
 				F4618DE121E6944900997431 /* GCStyleKit.swift in Sources */,
 				F4618DDF21E6928000997431 /* CategoriesListView.swift in Sources */,
 			);

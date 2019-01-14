@@ -2,7 +2,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class GridCollectionViewCell: UICollectionViewCell {
+class CategoryCollectionViewCell: UICollectionViewCell {
     static let idenfifier = "UICollectionViewCellIdentifier"
     private let bag = DisposeBag()
     var value: Variable<String?> = Variable(nil)
@@ -24,7 +24,7 @@ class GridCollectionViewCell: UICollectionViewCell {
         label = GCLabel(text: "",
                         color: GCStyleKit.fuschia,
                         size: .medium,
-                        weight: .bold,
+                        weight: .regular,
                         family: .system)
 
         super.init(frame: frame)
