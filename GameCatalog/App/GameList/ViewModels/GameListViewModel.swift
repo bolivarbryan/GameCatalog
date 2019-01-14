@@ -37,7 +37,15 @@ class GameListViewModel {
     func observeNewGames() {
         filteredGames.asObservable()
             .subscribe(onNext: { [weak self] in
-                self?.newestGames.value = $0
+
+                let gms = $0.sorted(by: { (game1, game2) -> Bool in
+                    game1.createdDate < game2.createdDate
+                })
+
+                let top = (gms.count > 5) ? 5 : (gms.count - 1)
+                guard top > 0 else { return }
+
+                self?.newestGames.value = Array(gms[0...(top - 1)])
             })
             .disposed(by: bag)
     }

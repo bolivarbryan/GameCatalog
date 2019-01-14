@@ -72,7 +72,7 @@ class GamesListView: UIView {
 
     func insertMostPopularGamesCollectionView() {
 
-        mostPopularGamesCollectionView = GameListItem(title: "Most Popular Games")
+        mostPopularGamesCollectionView = GameListItem(title: "Popular")
         stackView.addSubview(mostPopularGamesCollectionView)
         mostPopularGamesCollectionView.snp.makeConstraints({
             $0.top.equalTo(newestGamesCollectionView.snp.bottom)
@@ -89,50 +89,12 @@ class GamesListView: UIView {
     }
 
     func insertAllGamesCollectionView() {
-        let titleLabel = GCLabel(text: "All",
-                                 color: GCStyleKit.gray102,
-                                 size: .section,
-                                 weight: .bold,
-                                 family: .system)
-
-        stackView.addSubview(titleLabel)
-
-        titleLabel.snp.makeConstraints({
+        let allGamesCV = GameListItem(title: "All", direction: .vertical)
+        stackView.addSubview(allGamesCV)
+        allGamesCV.snp.makeConstraints {
             $0.top.equalTo(mostPopularGamesCollectionView.snp.bottom).offset(20)
-            $0.left.equalToSuperview().offset(27)
-            $0.width.equalToSuperview()
-            $0.height.equalTo(30)
-        })
-
-        let cellFrame = CGRect(x: 0,
-                               y: 0,
-                               width: verticalFlowLayout.itemSize.width,
-                               height: verticalFlowLayout.itemSize.height)
-
-        allGamesCollectionView = UICollectionView(frame: cellFrame,
-                                                          collectionViewLayout: verticalFlowLayout)
-
-        allGamesCollectionView.backgroundColor = .white
-        allGamesCollectionView.showsHorizontalScrollIndicator = false
-        allGamesCollectionView.register(GameCollectionViewCell.self,
-                                                forCellWithReuseIdentifier: GameCollectionViewCell.idenfifier)
-        allGamesCollectionView.isScrollEnabled = false
-
-        stackView.addSubview(allGamesCollectionView)
-        allGamesCollectionView.snp.makeConstraints({
-            $0.right.left.equalToSuperview()
-            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-            $0.bottom.equalToSuperview()
-        })
-
-        //Rx
-        allGames.asObservable()
-            .bind(to: allGamesCollectionView.rx.items(cellIdentifier: GameCollectionViewCell.idenfifier,
-                                                              cellType: GameCollectionViewCell.self)) { index, model, cell in
-                                                                cell.game.value = model
-                                                                cell.pictureContainerView.applyCorneredBorder(color: GCStyleKit.gray234, cornerRadius: 5)
-            }
-            .disposed(by: disposeBag)
+            $0.right.left.bottom.equalToSuperview()
+        }
 
         allGames.asObservable()
             .subscribe(onNext: { [weak self] _ in
@@ -145,10 +107,13 @@ class GamesListView: UIView {
 
                 self.scrollView.layoutSubviews()
                 self.stackView.updateConstraints()
-                self.allGamesCollectionView.layoutIfNeeded()
+                allGamesCV.collectionView.layoutIfNeeded()
             })
             .disposed(by: disposeBag)
 
+        allGames.asObservable()
+            .bind(to: allGamesCV.games)
+            .disposed(by: disposeBag)
 
     }
 }

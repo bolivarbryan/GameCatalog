@@ -2,12 +2,22 @@ import Foundation
 import UIKit
 
 struct Game: Codable {
-    let objectID, name, createdAt, updatedAt: String
+    let objectID: String
+    let name: String
+    let createdAt: String
+    let updatedAt: String
     let price: String
     let imageURL: String
     let popular: Bool
-    let rating, downloads, description, sku: String
+    let rating: String
+    let downloads: String
+    let description: String
+    let sku: String
     let universe, kind: String
+
+    var createdDate: Date {
+        return GCDateFormatter.iso8601.formatter().date(from: createdAt) ?? Date()
+    }
 
     var imageSource: URL? {
         return URL(string: imageURL)

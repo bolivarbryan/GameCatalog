@@ -26,6 +26,7 @@ public class GCStyleKit : NSObject {
         static let yellowPinkColor: UIColor = UIColor(red: 0.504, green: 0.278, blue: 0.757, alpha: 1.000)
         static let gray251: UIColor = UIColor(red: 0.984, green: 0.984, blue: 0.984, alpha: 1.000)
         static let gray234: UIColor = UIColor(red: 0.918, green: 0.918, blue: 0.918, alpha: 1.000)
+        static let gray151: UIColor = UIColor(red: 0.592, green: 0.592, blue: 0.592, alpha: 1.000)
         static let yellowPink: CGGradient = CGGradient(colorsSpace: nil, colors: [GCStyleKit.yellow.cgColor, GCStyleKit.fuschia.cgColor] as CFArray, locations: [0, 1])!
     }
 
@@ -39,6 +40,7 @@ public class GCStyleKit : NSObject {
     @objc dynamic public class var yellowPinkColor: UIColor { return Cache.yellowPinkColor }
     @objc dynamic public class var gray251: UIColor { return Cache.gray251 }
     @objc dynamic public class var gray234: UIColor { return Cache.gray234 }
+    @objc dynamic public class var gray151: UIColor { return Cache.gray151 }
 
     //// Gradients
 

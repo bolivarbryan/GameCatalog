@@ -15,7 +15,7 @@ class CategoriesListView: UIView {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 27, bottom: 0, right: 3)
         layout.minimumInteritemSpacing = 2;
-        layout.minimumLineSpacing = 2;
+        layout.minimumLineSpacing = 10;
         layout.itemSize = CGSize(width: cellWidth, height: height)
         layout.scrollDirection = .horizontal
         return layout
@@ -89,6 +89,7 @@ class CategoriesListView: UIView {
                 print($0)
             })
             .disposed(by: bag)
+
     }
 
 }
