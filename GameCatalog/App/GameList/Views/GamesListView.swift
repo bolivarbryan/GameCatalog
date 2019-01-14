@@ -58,7 +58,7 @@ class GamesListView: UIView {
     }
 
     func insertNewestGamesCollectionView() {
-        newestGamesCollectionView = GameListItem(title: "Newest Games")
+        newestGamesCollectionView = GameListItem(title: Language.newestGames.localized())
         stackView.addSubview(newestGamesCollectionView)
         newestGamesCollectionView.snp.makeConstraints({
             $0.top.right.left.equalToSuperview()
@@ -72,7 +72,7 @@ class GamesListView: UIView {
 
     func insertMostPopularGamesCollectionView() {
 
-        mostPopularGamesCollectionView = GameListItem(title: "Popular")
+        mostPopularGamesCollectionView = GameListItem(title: Language.popularGames.localized())
         stackView.addSubview(mostPopularGamesCollectionView)
         mostPopularGamesCollectionView.snp.makeConstraints({
             $0.top.equalTo(newestGamesCollectionView.snp.bottom)
@@ -89,7 +89,7 @@ class GamesListView: UIView {
     }
 
     func insertAllGamesCollectionView() {
-        let allGamesCV = GameListItem(title: "All", direction: .vertical)
+        let allGamesCV = GameListItem(title: Language.allGames.localized(), direction: .vertical)
         stackView.addSubview(allGamesCV)
         allGamesCV.snp.makeConstraints {
             $0.top.equalTo(mostPopularGamesCollectionView.snp.bottom).offset(20)

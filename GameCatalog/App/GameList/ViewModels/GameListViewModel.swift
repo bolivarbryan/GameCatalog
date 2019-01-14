@@ -65,7 +65,7 @@ class GameListViewModel {
             .map ({Array(Set($0))})
             .map({
                 var universesObject = [GameListViewModel.allUniversesKey]
-                universesObject.append(contentsOf: $0)
+                universesObject.append(contentsOf: $0.sorted())
                 return universesObject
             })
             .bind(to: universes)
