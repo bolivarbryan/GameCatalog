@@ -26,9 +26,9 @@ This Client fetches a videogames catalog where you can see prices, newest ones a
 - [x] Create XCode Project
 - [x] Install Dependencies
 - [x] Organize project structure
-- [ ] Create & Test Models
+- [x] Create & Test Models
 - [x] Create Networking Layer
-- [ ] Create Game List Controller with Layout
+- [x] Create Game List Controller with Layout
 - [ ] (**GameList, Data Persistence**) Connect Database with View Model Controller & Test
 - [x] (**GameList, Networking layer**) Connect Networking layer with Database and update once data is fetched
 - [x] (**GameList**) Implement Filtering by Specific Game Brand
