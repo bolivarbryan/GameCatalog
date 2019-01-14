@@ -6,6 +6,7 @@ class GCLabel: UILabel {
         case small = 12.0
         case medium = 14.0
         case large = 24.0
+        case section = 18.0
     }
 
     enum FontWeight: String {

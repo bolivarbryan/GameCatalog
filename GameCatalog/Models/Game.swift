@@ -9,6 +9,10 @@ struct Game: Codable {
     let rating, downloads, description, sku: String
     let universe, kind: String
 
+    var imageSource: URL? {
+        return URL(string: imageURL)
+    }
+
     enum CodingKeys: String, CodingKey {
         case name, createdAt, updatedAt, price, imageURL, popular, rating, downloads, description, universe, kind
         case objectID = "objectId"

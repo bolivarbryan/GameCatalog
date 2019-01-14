@@ -18,7 +18,7 @@ class GameListViewController: UIViewController {
 
     init() {
         super.init(nibName: nil, bundle: nil)
-        self.view.backgroundColor = .red
+        self.view.backgroundColor = .white
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -55,15 +55,20 @@ class GameListViewController: UIViewController {
 
         view.addSubview(gameListView)
         gameListView.snp.makeConstraints {
-            $0.top.equalTo(filterView.snp.bottom)
-            $0.right.left.equalToSuperview()
-            $0.height.equalTo(140)
+            $0.top.equalTo(filterView.snp.bottom).offset(10)
+            $0.right.left.bottom.equalToSuperview()
         }
 
         viewModel.newestGames.asObservable()
-            .map({$0.map { $0.name }})
-            .bind(to: gameListView.data)
+            .bind(to: gameListView.newestGames)
             .disposed(by: bag)
 
+        viewModel.filteredGames.asObservable()
+            .bind(to: gameListView.allGames)
+            .disposed(by: bag)
+
+        viewModel.mostPopularGames.asObservable()
+            .bind(to: gameListView.mostPopularGames)
+            .disposed(by: bag)
     }
 }

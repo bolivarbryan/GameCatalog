@@ -3,8 +3,17 @@ import RxCocoa
 import RxSwift
 import Moya
 
+enum GameSection {
+    case newest
+    case popular
+    case all
+}
+
+typealias GameSectionDatasource = Variable<[(section: GameSection, games: [Game])]>
+
 class GameListViewModel {
     static let allUniversesKey = "All"
+
     //MARK: - Properties
     private let games: Variable<[Game]> = Variable([])
     let filteredGames: Variable<[Game]> = Variable([])
@@ -22,6 +31,8 @@ class GameListViewModel {
         buildUniverseListFromGames()
         listVisibleGamesFromFilter()
     }
+
+    //MARK: - Functions
 
     func observeNewGames() {
         filteredGames.asObservable()
@@ -70,7 +81,6 @@ class GameListViewModel {
             .disposed(by: bag)
     }
 
-    //MARK: - Functions
     func fetchGames() {
         let provider = MoyaProvider<ApiService>()
         provider.request(.gameList) { (result) in
