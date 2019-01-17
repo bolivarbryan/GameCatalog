@@ -16,7 +16,7 @@ struct Game: Codable {
     let universe, kind: String
 
     var createdDate: Date {
-        return GCDateFormatter.iso8601.formatter().date(from: createdAt) ?? Date()
+        return GCDateFormatter.iso8601.formatter().date(from: createdAt) ?? Date(timeIntervalSince1970: 0)
     }
 
     var imageSource: URL? {

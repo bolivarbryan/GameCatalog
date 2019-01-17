@@ -14,6 +14,18 @@ class GameListItem: UIView {
         case vertical
     }
 
+    var direction: Direction
+
+    var calculatedHeight: CGFloat {
+        switch direction {
+        case .horizontal:
+            return self.bounds.height
+        case .vertical:
+            return titleLabel.bounds.height + collectionView.contentSize.height + 65
+        }
+    }
+
+
     let horizontalFlowLayout = UICollectionView.collectionViewLayout
     let verticalFlowLayout = UICollectionView.verticalCollectionViewLayout
     var borderColor: UIColor = GCStyleKit.fuschia {
@@ -29,7 +41,7 @@ class GameListItem: UIView {
                                   size: .section,
                                   weight: .bold,
                                   family: .system)
-
+        self.direction = direction
         super.init(frame: .zero)
 
         insertHeader()

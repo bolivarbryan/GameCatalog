@@ -22,6 +22,7 @@ class GameListViewModel {
     let universes: Variable<[String]> = Variable([])
     let selectedUniverse: Variable<String>
     let bag: DisposeBag = DisposeBag()
+    let filterValue: Variable<String> = Variable(GameListViewModel.allUniversesKey)
 
     //MARK: - Initializer
     init() {
@@ -30,9 +31,21 @@ class GameListViewModel {
         observeMostPopularGames()
         buildUniverseListFromGames()
         listVisibleGamesFromFilter()
+        observeFilterUpdate()
     }
 
     //MARK: - Functions
+    func observeFilterUpdate() {
+        filterValue.asObservable()
+            .subscribe(onNext: { universe in
+                if universe == GameListViewModel.allUniversesKey {
+                    self.filteredGames.value = self.games.value
+                } else {
+                    self.filteredGames.value = self.games.value.filter({ $0.universe == universe })
+                }
+            })
+            .disposed(by: bag)
+    }
 
     func observeNewGames() {
         filteredGames.asObservable()
@@ -60,7 +73,7 @@ class GameListViewModel {
     }
 
     func buildUniverseListFromGames() {
-        filteredGames.asObservable()
+        games.asObservable()
             .map ({ $0.map({ game in game.universe }) })
             .map ({Array(Set($0))})
             .map({

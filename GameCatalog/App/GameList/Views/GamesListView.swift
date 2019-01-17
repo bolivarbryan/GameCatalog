@@ -19,10 +19,9 @@ class GamesListView: UIView {
     private let stackView: UIView
     private let scrollView: UIScrollView
 
-
-    var newestGamesCollectionView: GameListItem!
-    var mostPopularGamesCollectionView: GameListItem!
-    var allGamesCollectionView: UICollectionView!
+    let newestGamesCollectionView: GameListItem = GameListItem(title: Language.newestGames.localized())
+    let mostPopularGamesCollectionView: GameListItem = GameListItem(title: Language.popularGames.localized())
+    let allGamesCV = GameListItem(title: Language.allGames.localized(), direction: .vertical)
 
     private let disposeBag = DisposeBag()
 
@@ -58,7 +57,6 @@ class GamesListView: UIView {
     }
 
     func insertNewestGamesCollectionView() {
-        newestGamesCollectionView = GameListItem(title: Language.newestGames.localized())
         stackView.addSubview(newestGamesCollectionView)
         newestGamesCollectionView.snp.makeConstraints({
             $0.top.right.left.equalToSuperview()
@@ -71,8 +69,6 @@ class GamesListView: UIView {
     }
 
     func insertMostPopularGamesCollectionView() {
-
-        mostPopularGamesCollectionView = GameListItem(title: Language.popularGames.localized())
         stackView.addSubview(mostPopularGamesCollectionView)
         mostPopularGamesCollectionView.snp.makeConstraints({
             $0.top.equalTo(newestGamesCollectionView.snp.bottom)
@@ -89,7 +85,6 @@ class GamesListView: UIView {
     }
 
     func insertAllGamesCollectionView() {
-        let allGamesCV = GameListItem(title: Language.allGames.localized(), direction: .vertical)
         stackView.addSubview(allGamesCV)
         allGamesCV.snp.makeConstraints {
             $0.top.equalTo(mostPopularGamesCollectionView.snp.bottom).offset(20)
@@ -101,13 +96,18 @@ class GamesListView: UIView {
 
                 guard let self = self else { return }
 
+                let calculatedHeight = 200
+                    + 200
+                    + self.allGamesCV.calculatedHeight
+
                 self.stackView.snp.updateConstraints ({
-                    $0.height.equalTo( (CGFloat(self.allGames.value.count)/1.75 * self.verticalFlowLayout.itemSize.height) + 300 )
+
+                    $0.height.equalTo( calculatedHeight )
                 })
 
                 self.scrollView.layoutSubviews()
                 self.stackView.updateConstraints()
-                allGamesCV.collectionView.layoutIfNeeded()
+                self.allGamesCV.collectionView.layoutIfNeeded()
             })
             .disposed(by: disposeBag)
 

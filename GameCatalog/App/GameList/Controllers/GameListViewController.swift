@@ -49,6 +49,13 @@ class GameListViewController: UIViewController {
         }
         filterView.backgroundColor = .black
 
+        filterView.collectionView.rx.modelSelected(String.self)
+            .subscribe(onNext:{
+                self.viewModel.filterValue.value = $0
+            })
+            .disposed(by: bag)
+
+
         viewModel.universes.asObservable()
         .bind(to: filterView.categories)
         .disposed(by: bag)
