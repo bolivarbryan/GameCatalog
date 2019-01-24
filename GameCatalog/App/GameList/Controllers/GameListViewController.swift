@@ -52,7 +52,7 @@ class GameListViewController: UIViewController {
 
         filterView.collectionView.rx.modelSelected(String.self)
             .subscribe(onNext:{
-                self.viewModel.filterValue = $0
+                self.viewModel.selectedUniverse = $0
             })
             .disposed(by: bag)
 

@@ -19,6 +19,29 @@ class GameListItem: UIView {
         case vertical
     }
 
+    var collectionViewLayout: UICollectionViewFlowLayout = {
+        let cellWidth = 110
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 11, left: 27, bottom: 0, right: 11)
+        layout.minimumInteritemSpacing = 0;
+        layout.minimumLineSpacing = 11;
+        layout.itemSize = CGSize(width: cellWidth, height: cellWidth + 50)
+        layout.scrollDirection = .horizontal
+        return layout
+    }()
+
+    var verticalCollectionViewLayout: UICollectionViewFlowLayout = {
+        let cellWidth = (UIScreen.main.bounds.width/2.5) - 2.5
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 27, bottom: 0, right: 27)
+        layout.minimumInteritemSpacing = 2;
+        layout.minimumLineSpacing = 2;
+        layout.itemSize = CGSize(width: cellWidth, height: cellWidth + 50)
+        layout.scrollDirection = .vertical
+        return layout
+    }()
+
+
     var direction: Direction
 
     var calculatedHeight: CGFloat {
@@ -26,7 +49,7 @@ class GameListItem: UIView {
         case .horizontal:
             return self.bounds.height
         case .vertical:
-            let itemHeight = UICollectionView.verticalCollectionViewLayout.itemSize.height
+            let itemHeight = verticalCollectionViewLayout.itemSize.height
             let height = CGFloat(round(Double(games.value.count)/2)) * itemHeight
 
             return titleLabel.bounds.height
@@ -35,16 +58,13 @@ class GameListItem: UIView {
                 + height
                 + 50
                 + (CGFloat(round(Double(games.value.count)/2))
-                    * (UICollectionView.verticalCollectionViewLayout.sectionInset.top
-                    + UICollectionView.verticalCollectionViewLayout.sectionInset.bottom
-                    + UICollectionView.verticalCollectionViewLayout.minimumLineSpacing
+                    * (verticalCollectionViewLayout.sectionInset.top
+                    + verticalCollectionViewLayout.sectionInset.bottom
+                    + verticalCollectionViewLayout.minimumLineSpacing
             ))
         }
     }
 
-
-    let horizontalFlowLayout = UICollectionView.collectionViewLayout
-    let verticalFlowLayout = UICollectionView.verticalCollectionViewLayout
     var borderColor: UIColor = GCStyleKit.fuschia {
         didSet {
             collectionView.reloadData()
@@ -112,11 +132,11 @@ class GameListItem: UIView {
     func configureHorizontalUI() {
         let cellFrame = CGRect(x: 0,
                                y: 0,
-                               width: horizontalFlowLayout.itemSize.width,
-                               height: horizontalFlowLayout.itemSize.height)
+                               width: collectionViewLayout.itemSize.width,
+                               height: collectionViewLayout.itemSize.height)
 
         collectionView = UICollectionView(frame: cellFrame,
-                                          collectionViewLayout: horizontalFlowLayout)
+                                          collectionViewLayout: collectionViewLayout)
 
         collectionView.backgroundColor = .white
         collectionView.showsHorizontalScrollIndicator = false
@@ -145,11 +165,11 @@ class GameListItem: UIView {
 
         let cellFrame = CGRect(x: 0,
                                y: 0,
-                               width: UICollectionView.verticalCollectionViewLayout.itemSize.width,
-                               height: UICollectionView.verticalCollectionViewLayout.itemSize.height)
+                               width: verticalCollectionViewLayout.itemSize.width,
+                               height: verticalCollectionViewLayout.itemSize.height)
 
         collectionView = UICollectionView(frame: cellFrame,
-                                          collectionViewLayout: UICollectionView.verticalCollectionViewLayout)
+                                          collectionViewLayout: verticalCollectionViewLayout)
 
         collectionView.register(GameCollectionViewCell.self,
                                 forCellWithReuseIdentifier: GameCollectionViewCell.idenfifier)

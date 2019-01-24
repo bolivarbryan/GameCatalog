@@ -40,9 +40,6 @@ class GamesListView: UIView {
         }
     }
 
-    let horizontalFlowLayout = UICollectionView.collectionViewLayout
-    let verticalFlowLayout = UICollectionView.verticalCollectionViewLayout
-
     var delegate: GameListViewDelegate? = nil
     private let stackView: UIView
     private let scrollView: UIScrollView

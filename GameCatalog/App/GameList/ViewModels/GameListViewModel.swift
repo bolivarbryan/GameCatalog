@@ -62,17 +62,12 @@ class GameListViewModel {
     var newestGames: [Game] = []
     var mostPopularGames: [Game] = []
     let universes: Variable<[String]> = Variable([])
-    let selectedUniverse: String
-    let bag: DisposeBag = DisposeBag()
-    var filterValue: String = GameListViewModel.allUniversesKey {
+    var selectedUniverse: String = GameListViewModel.allUniversesKey {
         didSet {
-            filteredGames = games.filter({ game in
-                if selectedUniverse == GameListViewModel.allUniversesKey { return true }
-                return game.universe == selectedUniverse
-            })
-
+            reloadFilters()
         }
     }
+    let bag: DisposeBag = DisposeBag()
 
     //MARK: - Initializer
     init() {
@@ -96,5 +91,13 @@ class GameListViewModel {
                 print(error.localizedDescription)
             }
         }
+    }
+
+    func reloadFilters() {
+        filteredGames = games.filter({ game in
+            if selectedUniverse == GameListViewModel.allUniversesKey { return true }
+            return game.universe == selectedUniverse
+        })
+        delegate?.didFetch()
     }
 }
