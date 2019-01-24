@@ -9,6 +9,15 @@ protocol GameListViewDelegate {
 class GamesListView: UIView {
     var newestGames: [Game] = [] {
         didSet {
+            if newestGames.count == 0 {
+                newestGamesCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(0)
+                }
+            } else {
+                newestGamesCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(240)
+                }
+            }
             newestGamesCollectionView.games.value = newestGames
             newestGamesCollectionView.collectionView.reloadData()
         }
@@ -16,6 +25,15 @@ class GamesListView: UIView {
 
     var mostPopularGames: [Game] = [] {
         didSet {
+            if mostPopularGames.count == 0 {
+                mostPopularGamesCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(0)
+                }
+            } else {
+                mostPopularGamesCollectionView.snp.updateConstraints {
+                    $0.height.equalTo(240)
+                }
+            }
             mostPopularGamesCollectionView.games.value = mostPopularGames
             mostPopularGamesCollectionView.collectionView.reloadData()
         }
@@ -26,8 +44,8 @@ class GamesListView: UIView {
             allGamesCV.games.value = allGames
             allGamesCV.collectionView.reloadData()
 
-            let calculatedHeight = 200
-                + 200
+            let calculatedHeight = mostPopularGamesCollectionView.bounds.height
+                + newestGamesCollectionView.bounds.height
                 + self.allGamesCV.calculatedHeight
 
             stackView.snp.updateConstraints ({
@@ -53,6 +71,7 @@ class GamesListView: UIView {
         self.stackView = UIView(frame: .zero)
         self.scrollView = UIScrollView(frame: CGRect.zero)
         super.init(frame: .zero)
+        self.clipsToBounds = true
         configureUI()
     }
 

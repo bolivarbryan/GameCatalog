@@ -99,6 +99,8 @@ class GameListItem: UIView {
             .disposed(by: disposeBag)
 
         collectionView.allowsSelection = true
+        clipsToBounds = true
+
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -147,7 +149,7 @@ class GameListItem: UIView {
         collectionView.snp.makeConstraints({
             $0.top.equalTo(titleLabel.snp.bottom).offset(10)
             $0.right.left.equalToSuperview()
-            $0.height.equalTo(150)
+            $0.bottom.equalToSuperview()
         })
 
         games.asObservable()
