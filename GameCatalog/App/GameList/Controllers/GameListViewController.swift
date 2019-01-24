@@ -31,6 +31,7 @@ class GameListViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         viewModel.fetchGames()
+        viewModel.delegate = self
     }
 
     //MARK: - Functions
@@ -51,10 +52,9 @@ class GameListViewController: UIViewController {
 
         filterView.collectionView.rx.modelSelected(String.self)
             .subscribe(onNext:{
-                self.viewModel.filterValue.value = $0
+                self.viewModel.filterValue = $0
             })
             .disposed(by: bag)
-
 
         viewModel.universes.asObservable()
         .bind(to: filterView.categories)
@@ -66,16 +66,20 @@ class GameListViewController: UIViewController {
             $0.right.left.bottom.equalToSuperview()
         }
 
-        viewModel.newestGames.asObservable()
-            .bind(to: gameListView.newestGames)
-            .disposed(by: bag)
+        gameListView.delegate = self
+    }
+}
 
-        viewModel.filteredGames.asObservable()
-            .bind(to: gameListView.allGames)
-            .disposed(by: bag)
+extension GameListViewController: GameListViewModelDelegate {
+    func didFetch() {
+        gameListView.newestGames = viewModel.newestGames
+        gameListView.mostPopularGames = viewModel.mostPopularGames
+        gameListView.allGames = viewModel.filteredGames
+    }
+}
 
-        viewModel.mostPopularGames.asObservable()
-            .bind(to: gameListView.mostPopularGames)
-            .disposed(by: bag)
+extension GameListViewController: GameListViewDelegate {
+    func didSelectGame(game: Game) {
+        print(game.name)
     }
 }

@@ -1,16 +1,44 @@
 import UIKit
-import RxCocoa
-import RxSwift
 import SnapKit
+import RxSwift
 
 protocol GameListViewDelegate {
     func didSelectGame(game: Game)
 }
 
 class GamesListView: UIView {
-    let newestGames: Variable<[Game]> = Variable([])
-    let mostPopularGames: Variable<[Game]> = Variable([])
-    let allGames: Variable<[Game]> = Variable([])
+    var newestGames: [Game] = [] {
+        didSet {
+            newestGamesCollectionView.games.value = newestGames
+            newestGamesCollectionView.collectionView.reloadData()
+        }
+    }
+
+    var mostPopularGames: [Game] = [] {
+        didSet {
+            mostPopularGamesCollectionView.games.value = mostPopularGames
+            mostPopularGamesCollectionView.collectionView.reloadData()
+        }
+    }
+
+    var allGames: [Game] = [] {
+        didSet {
+            allGamesCV.games.value = allGames
+            allGamesCV.collectionView.reloadData()
+
+            let calculatedHeight = 200
+                + 200
+                + self.allGamesCV.calculatedHeight
+
+            stackView.snp.updateConstraints ({
+                $0.height.equalTo( calculatedHeight )
+            })
+
+            scrollView.layoutSubviews()
+            stackView.updateConstraints()
+            allGamesCV.collectionView.layoutIfNeeded()
+        }
+    }
 
     let horizontalFlowLayout = UICollectionView.collectionViewLayout
     let verticalFlowLayout = UICollectionView.verticalCollectionViewLayout
@@ -19,11 +47,10 @@ class GamesListView: UIView {
     private let stackView: UIView
     private let scrollView: UIScrollView
 
+    let bag = DisposeBag()
     let newestGamesCollectionView: GameListItem = GameListItem(title: Language.newestGames.localized())
     let mostPopularGamesCollectionView: GameListItem = GameListItem(title: Language.popularGames.localized())
     let allGamesCV = GameListItem(title: Language.allGames.localized(), direction: .vertical)
-
-    private let disposeBag = DisposeBag()
 
     override init(frame: CGRect) {
         self.stackView = UIView(frame: .zero)
@@ -62,10 +89,7 @@ class GamesListView: UIView {
             $0.top.right.left.equalToSuperview()
             $0.height.equalTo(200)
         })
-
-        newestGames.asObservable()
-            .bind(to: newestGamesCollectionView.games)
-            .disposed(by: disposeBag)
+        newestGamesCollectionView.delegate = self
     }
 
     func insertMostPopularGamesCollectionView() {
@@ -76,12 +100,8 @@ class GamesListView: UIView {
             $0.height.equalTo(200)
         })
 
-        //Rx
-        mostPopularGames.asObservable()
-            .bind(to: mostPopularGamesCollectionView.games)
-            .disposed(by: disposeBag)
-
         mostPopularGamesCollectionView.borderColor = GCStyleKit.gray234
+        mostPopularGamesCollectionView.delegate = self
     }
 
     func insertAllGamesCollectionView() {
@@ -90,30 +110,12 @@ class GamesListView: UIView {
             $0.top.equalTo(mostPopularGamesCollectionView.snp.bottom).offset(20)
             $0.right.left.bottom.equalToSuperview()
         }
+        allGamesCV.delegate = self
+    }
+}
 
-        allGames.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-
-                guard let self = self else { return }
-
-                let calculatedHeight = 200
-                    + 200
-                    + self.allGamesCV.calculatedHeight
-
-                self.stackView.snp.updateConstraints ({
-
-                    $0.height.equalTo( calculatedHeight )
-                })
-
-                self.scrollView.layoutSubviews()
-                self.stackView.updateConstraints()
-                self.allGamesCV.collectionView.layoutIfNeeded()
-            })
-            .disposed(by: disposeBag)
-
-        allGames.asObservable()
-            .bind(to: allGamesCV.games)
-            .disposed(by: disposeBag)
-
+extension GamesListView: GameListItemDelegate {
+    func didSelectGame(game: Game) {
+        self.delegate?.didSelectGame(game: game)
     }
 }

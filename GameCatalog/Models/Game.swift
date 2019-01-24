@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-struct Game: Codable {
+class Game: Codable {
     let objectID: String
     let name: String
     let createdAt: String
@@ -31,6 +31,6 @@ struct Game: Codable {
 }
 
 //Used for easy parsing on API response
-struct Games: Codable {
+class Games: Codable {
     let results: [Game]
 }

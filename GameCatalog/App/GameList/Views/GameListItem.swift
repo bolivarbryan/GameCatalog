@@ -2,12 +2,17 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+protocol GameListItemDelegate {
+    func didSelectGame(game: Game)
+}
+
 class GameListItem: UIView {
     let titleLabel: GCLabel
     var collectionView: UICollectionView!
     let games: Variable<[Game]> = Variable([])
     private let disposeBag = DisposeBag()
     var title: String
+    var delegate: GameListItemDelegate? = nil
 
     enum Direction {
         case horizontal
@@ -21,7 +26,19 @@ class GameListItem: UIView {
         case .horizontal:
             return self.bounds.height
         case .vertical:
-            return titleLabel.bounds.height + collectionView.contentSize.height + 65
+            let itemHeight = UICollectionView.verticalCollectionViewLayout.itemSize.height
+            let height = CGFloat(round(Double(games.value.count)/2)) * itemHeight
+
+            return titleLabel.bounds.height
+                + titleLabel.layoutMargins.top
+                + titleLabel.layoutMargins.bottom
+                + height
+                + 50
+                + (CGFloat(round(Double(games.value.count)/2))
+                    * (UICollectionView.verticalCollectionViewLayout.sectionInset.top
+                    + UICollectionView.verticalCollectionViewLayout.sectionInset.bottom
+                    + UICollectionView.verticalCollectionViewLayout.minimumLineSpacing
+            ))
         }
     }
 
@@ -54,6 +71,14 @@ class GameListItem: UIView {
             configureVerticalUI()
         }
 
+        collectionView.rx.modelSelected(Game.self)
+            .asObservable()
+            .subscribe(onNext:{
+                self.delegate?.didSelectGame(game: $0)
+            })
+            .disposed(by: disposeBag)
+
+        collectionView.allowsSelection = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -138,6 +163,7 @@ class GameListItem: UIView {
                                                 cell.pictureContainerView.applyCorneredBorder(color: GCStyleKit.gray234, cornerRadius: 5)
             }
             .disposed(by: disposeBag)
+
 
         addSubview(collectionView)
         collectionView.snp.makeConstraints({

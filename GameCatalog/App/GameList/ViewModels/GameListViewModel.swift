@@ -11,95 +11,72 @@ enum GameSection {
 
 typealias GameSectionDatasource = Variable<[(section: GameSection, games: [Game])]>
 
+protocol GameListViewModelDelegate {
+    func didFetch()
+}
+
 class GameListViewModel {
     static let allUniversesKey = "All"
-
+    
     //MARK: - Properties
-    private let games: Variable<[Game]> = Variable([])
-    let filteredGames: Variable<[Game]> = Variable([])
-    let newestGames: Variable<[Game]> = Variable([])
-    let mostPopularGames: Variable<[Game]> = Variable([])
+    private var games: [Game] = [] {
+        didSet {
+            if selectedUniverse == GameListViewModel.allUniversesKey {
+                self.filteredGames = self.games
+            } else {
+                self.filteredGames = self.games.filter({ $0.universe == selectedUniverse })
+            }
+
+            //universes list
+            var universesObject = [GameListViewModel.allUniversesKey]
+            var sortedNames = games
+                .map { $0.universe}
+
+            sortedNames = Array(Set(sortedNames))
+            .sorted(by: {$0 < $1})
+
+
+            universesObject.append(contentsOf: sortedNames )
+
+            universes.value = universesObject
+
+        }
+    }
+
+    var filteredGames: [Game] = [] {
+        didSet {
+            //newest games
+            let gms = filteredGames.sorted(by: { (game1, game2) -> Bool in
+                game1.createdDate < game2.createdDate
+            })
+
+            let top = (gms.count > 5) ? 5 : (gms.count - 1)
+            guard top > 0 else { return }
+
+            newestGames = Array(gms[0...(top - 1)])
+            mostPopularGames = filteredGames.filter({ $0.popular == true })
+        }
+    }
+
+    var delegate: GameListViewModelDelegate? = nil
+    var newestGames: [Game] = []
+    var mostPopularGames: [Game] = []
     let universes: Variable<[String]> = Variable([])
-    let selectedUniverse: Variable<String>
+    let selectedUniverse: String
     let bag: DisposeBag = DisposeBag()
-    let filterValue: Variable<String> = Variable(GameListViewModel.allUniversesKey)
+    var filterValue: String = GameListViewModel.allUniversesKey {
+        didSet {
+            filteredGames = games.filter({ game in
+                if selectedUniverse == GameListViewModel.allUniversesKey { return true }
+                return game.universe == selectedUniverse
+            })
+
+        }
+    }
 
     //MARK: - Initializer
     init() {
-        selectedUniverse = Variable(GameListViewModel.allUniversesKey)
-        observeNewGames()
-        observeMostPopularGames()
-        buildUniverseListFromGames()
-        listVisibleGamesFromFilter()
-        observeFilterUpdate()
-    }
-
-    //MARK: - Functions
-    func observeFilterUpdate() {
-        filterValue.asObservable()
-            .subscribe(onNext: { universe in
-                if universe == GameListViewModel.allUniversesKey {
-                    self.filteredGames.value = self.games.value
-                } else {
-                    self.filteredGames.value = self.games.value.filter({ $0.universe == universe })
-                }
-            })
-            .disposed(by: bag)
-    }
-
-    func observeNewGames() {
-        filteredGames.asObservable()
-            .subscribe(onNext: { [weak self] in
-
-                let gms = $0.sorted(by: { (game1, game2) -> Bool in
-                    game1.createdDate < game2.createdDate
-                })
-
-                let top = (gms.count > 5) ? 5 : (gms.count - 1)
-                guard top > 0 else { return }
-
-                self?.newestGames.value = Array(gms[0...(top - 1)])
-            })
-            .disposed(by: bag)
-    }
-
-    func observeMostPopularGames() {
-        filteredGames.asObservable()
-            .map ({ gamesObject in gamesObject.filter({ $0.popular == true })})
-            .subscribe(onNext: { [weak self] in
-                self?.mostPopularGames.value = $0
-            })
-            .disposed(by: bag)
-    }
-
-    func buildUniverseListFromGames() {
-        games.asObservable()
-            .map ({ $0.map({ game in game.universe }) })
-            .map ({Array(Set($0))})
-            .map({
-                var universesObject = [GameListViewModel.allUniversesKey]
-                universesObject.append(contentsOf: $0.sorted())
-                return universesObject
-            })
-            .bind(to: universes)
-            .disposed(by: bag)
-    }
-
-    func listVisibleGamesFromFilter() {
-        selectedUniverse.asObservable()
-            .subscribe(onNext: { selectedUniverseObject in
-                self.games.asObservable()
-                    .map ({ gamesObject in
-                        gamesObject
-                            .filter({ game in
-                                if selectedUniverseObject == GameListViewModel.allUniversesKey { return true }
-                                return game.universe == selectedUniverseObject
-                            })
-                    })
-                    .bind(to: self.filteredGames)
-                    .disposed(by: self.bag)
-            })
-            .disposed(by: bag)
+        selectedUniverse = GameListViewModel.allUniversesKey
     }
 
     func fetchGames() {
@@ -110,10 +87,11 @@ class GameListViewModel {
                 let data = moyaResponse.data
                 do {
                     let games = try JSONDecoder().decode(Games.self, from: data)
-                    self.games.value = games.results
+                    self.games = games.results
                 } catch {
                     print(error.localizedDescription)
                 }
+                self.delegate?.didFetch()
             case let .failure(error):
                 print(error.localizedDescription)
             }

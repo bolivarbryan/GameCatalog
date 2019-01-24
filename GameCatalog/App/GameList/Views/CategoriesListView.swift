@@ -89,7 +89,6 @@ class CategoriesListView: UIView {
                 print($0)
             })
             .disposed(by: bag)
-
     }
 
 }
