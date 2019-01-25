@@ -43,6 +43,13 @@ class GameListViewController: UIViewController {
         }
         headerView.backgroundColor = .white
 
+        headerView.rightButton.rx.tap.asObservable()
+            .subscribe(onNext:{ _ in
+                let vc = FilterViewController()
+                self.present(vc, animated: true, completion: nil)
+            })
+        .disposed(by: bag)
+
         view.addSubview(filterView)
         filterView.snp.makeConstraints {
             $0.top.equalTo(headerView.snp.bottom)

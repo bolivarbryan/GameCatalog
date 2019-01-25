@@ -6,7 +6,7 @@ fileprivate let statusBarHeight: CGFloat = 20
 fileprivate let barHeight: CGFloat = 99
 
 class HeaderView: UIView {
-    private let rightButton: UIButton
+    let rightButton: UIButton
     private let titleLabel: GCLabel
 
     enum NavigationAction {
