@@ -1,10 +1,16 @@
 import UIKit
 import RangeSeekSlider
 
+
+protocol RangePickerTableViewCellDelegate {
+    func didSelectRange(range: (Double, Double))
+}
+
 class RangePickerTableViewCell: UITableViewCell {
 
     static let identifier = "RangePickerTableViewCell"
     let slider = RangeSeekSlider(frame: .zero)
+    var delegate: RangePickerTableViewCellDelegate? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +29,7 @@ class RangePickerTableViewCell: UITableViewCell {
         selectionStyle = .none
         slider.minValue = 19.99
         slider.maxValue = 199.99
+        slider.selectedMaxValue = slider.maxValue
         slider.lineHeight = 4
         slider.colorBetweenHandles = GCStyleKit.green
         slider.tintColor = .lightGray
@@ -51,6 +58,6 @@ class RangePickerTableViewCell: UITableViewCell {
 
 extension RangePickerTableViewCell: RangeSeekSliderDelegate {
     func rangeSeekSlider(_ slider: RangeSeekSlider, didChange minValue: CGFloat, maxValue: CGFloat) {
-        print(minValue, maxValue)
+        delegate?.didSelectRange(range: (Double(minValue), Double(maxValue)))
     }
 }

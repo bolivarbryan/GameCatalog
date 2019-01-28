@@ -88,6 +88,12 @@ class FilterViewController: UIViewController {
             $0.bottom.equalToSuperview().offset(-32)
         })
 
+        applyFilterButton.rx.tap.asObservable()
+            .subscribe(onNext:{ _ in
+                print(self.viewModel)
+            })
+            .disposed(by: bag)
+
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
@@ -122,6 +128,7 @@ extension FilterViewController: UITableViewDataSource {
             let cellIdentifier = RangePickerTableViewCell.identifier
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RangePickerTableViewCell
             cell.configureUI()
+            cell.delegate = self
             return cell
         case .rate:
             let cellIdentifier = FilterSelectionTableViewCell.identifier
@@ -163,7 +170,21 @@ extension FilterViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sectionData = generateSection(section: datasource[indexPath.section])
 
+        switch sectionData.type {
+        case .category :
+            viewModel.categorySelected = sectionData.elements[indexPath.row]
+        case .rate:
+            guard
+                let value = Int(sectionData.elements[indexPath.row])
+                else { return }
+            viewModel.addOrRemoveRateValue(value)
+        case .universe:
+            viewModel.selectedUniverse = sectionData.elements[indexPath.row]
+        default:
+            return
+        }
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -192,5 +213,11 @@ extension FilterViewController: UITableViewDelegate {
             .filter { $0.section == indexPath.section}
             .forEach { tableView.deselectRow(at: $0, animated: true) }
         return indexPath
+    }
+}
+
+extension FilterViewController: RangePickerTableViewCellDelegate {
+    func didSelectRange(range: (Double, Double)) {
+        viewModel.priceRange = range
     }
 }
