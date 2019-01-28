@@ -14,9 +14,10 @@ class RangePickerTableViewCell: UITableViewCell {
     }
 
     func configureUI() {
+        selectionStyle = .none
         let slider = RangeSeekSlider(frame: .zero)
-        slider.minValue = 19.9
-        slider.maxValue = 199.9
+        slider.minValue = 19.99
+        slider.maxValue = 199.99
         slider.lineHeight = 4
         slider.colorBetweenHandles = GCStyleKit.green
         slider.tintColor = .lightGray
@@ -32,12 +33,18 @@ class RangePickerTableViewCell: UITableViewCell {
         slider.minLabelFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
         slider.maxLabelFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
         slider.minDistance = 20
-
+        slider.delegate = self
         addSubview(slider)
         slider.snp.makeConstraints( {
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
+            $0.left.equalToSuperview().offset(15)
+            $0.right.equalToSuperview().offset(-15)
             $0.bottom.equalToSuperview().offset(10)
         })
+    }
+}
+
+extension RangePickerTableViewCell: RangeSeekSliderDelegate {
+    func rangeSeekSlider(_ slider: RangeSeekSlider, didChange minValue: CGFloat, maxValue: CGFloat) {
+        print(minValue, maxValue)
     }
 }

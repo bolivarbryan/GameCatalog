@@ -22,7 +22,7 @@ class FilterViewController: UIViewController {
         case .category:
             return (section, ["Downloads", "Date added", "Price"])
         case .range:
-            return (section, ["19.99", "199.99"])
+            return (section, [])
         case .rate:
             return (section, (1...5).map({"\($0)"}))
         case .universe:
@@ -84,7 +84,7 @@ class FilterViewController: UIViewController {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-
+        tableView.allowsMultipleSelection = true
         navigationItem.leftBarButtonItem = backButton
     }
     
@@ -147,7 +147,7 @@ extension FilterViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -165,4 +165,10 @@ extension FilterViewController: UITableViewDelegate {
         }
     }
 
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        tableView.indexPathsForSelectedRows?
+            .filter { $0.section == indexPath.section }
+            .forEach { tableView.deselectRow(at: $0, animated: true) }
+        return indexPath
+    }
 }

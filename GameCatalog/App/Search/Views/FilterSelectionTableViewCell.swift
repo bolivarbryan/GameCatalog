@@ -42,6 +42,7 @@ class FilterSelectionTableViewCell: UITableViewCell {
     var value: String = ""
     var checkmarkStyle: CheckMarkStyle = .circled
     var contentStyle: ContentStyle = .text
+    var checkButton: UIButton? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,9 +50,11 @@ class FilterSelectionTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        checkButton?.isSelected = selected
     }
 
     func configureUI() {
+        selectionStyle = .none
         switch contentStyle {
         case .text:
             textLabel?.text = value
@@ -63,9 +66,13 @@ class FilterSelectionTableViewCell: UITableViewCell {
             addStars(value: starsCount)
         }
 
-        let button = checkmarkStyle.checkmarkButton
-        addSubview(button)
-        button.snp.makeConstraints({
+        checkButton =  checkmarkStyle.checkmarkButton
+        guard
+            let checkButton = checkButton
+            else { return }
+
+        addSubview(checkButton)
+        checkButton.snp.makeConstraints({
             $0.right.equalToSuperview().offset(-11)
             $0.centerY.equalToSuperview()
             $0.height.width.equalTo(17)
