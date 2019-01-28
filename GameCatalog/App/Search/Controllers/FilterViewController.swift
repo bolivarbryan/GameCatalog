@@ -40,13 +40,13 @@ class FilterViewController: UIViewController {
                                          action: nil)
 
         button.tintColor = GCStyleKit.fuschia
-        button.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold",
-                                                                               size: 17.0)!],
-                                          for: .normal)
 
-        button.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold",
-                                                                           size: 17.0)!],
-                                      for: .highlighted )
+        guard
+            let font =  UIFont(name: "Helvetica-Bold", size: 17.0)
+            else { fatalError("This Font should be found in system") }
+
+        button.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        button.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .highlighted )
         button.rx.tap.asObservable().subscribe(onNext:{ _ in
             self.dismiss(animated: true, completion: nil)
         })
@@ -98,7 +98,9 @@ extension FilterViewController: UITableViewDataSource {
         case .category:
             let cellIdentifier = FilterSelectionTableViewCell.identifier
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FilterSelectionTableViewCell
-            cell.textLabel?.text = section.elements[indexPath.row]
+            cell.value = section.elements[indexPath.row]
+            cell.checkmarkStyle = .circled
+            cell.configureUI()
             return cell
         case .range:
             let cellIdentifier = RangePickerTableViewCell.identifier
@@ -116,7 +118,9 @@ extension FilterViewController: UITableViewDataSource {
         case .universe:
             let cellIdentifier = FilterSelectionTableViewCell.identifier
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FilterSelectionTableViewCell
-            cell.textLabel?.text = section.elements[indexPath.row]
+            cell.value = section.elements[indexPath.row]
+            cell.checkmarkStyle = .circled
+            cell.configureUI()
             return cell
         }
     }

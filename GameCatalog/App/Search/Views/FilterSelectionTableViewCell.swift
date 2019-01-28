@@ -23,6 +23,14 @@ class FilterSelectionTableViewCell: UITableViewCell {
                 return #imageLiteral(resourceName: "squaredCheck")
             }
         }
+
+        var checkmarkButton: UIButton {
+            let button = UIButton(frame: .zero)
+            button.setImage(self.onImage, for: .highlighted)
+            button.setImage(self.onImage, for: .selected)
+            button.setImage(self.offImage, for: .normal)
+            return button
+        }
     }
 
     enum ContentStyle {
@@ -37,7 +45,6 @@ class FilterSelectionTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -55,6 +62,15 @@ class FilterSelectionTableViewCell: UITableViewCell {
 
             addStars(value: starsCount)
         }
+
+        let button = checkmarkStyle.checkmarkButton
+        addSubview(button)
+        button.snp.makeConstraints({
+            $0.right.equalToSuperview().offset(-11)
+            $0.centerY.equalToSuperview()
+            $0.height.width.equalTo(17)
+        })
+
     }
 
     func addStars(value: Int) {
