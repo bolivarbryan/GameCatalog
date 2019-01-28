@@ -63,7 +63,9 @@ class FilterViewController: UIViewController {
     func generateSection(section: FilterSection) -> (type: FilterSection, elements: [String]) {
         switch section {
         case .category:
-            return (section, ["Downloads", "Date added", "Price"])
+            return (section, [FilterViewModel.Category.downloads.rawValue,
+                              FilterViewModel.Category.dateAdded.rawValue,
+                              FilterViewModel.Category.price.rawValue])
         case .range:
             return (section, [])
         case .rate:
@@ -178,8 +180,8 @@ extension FilterViewController: UITableViewDelegate {
         let sectionData = generateSection(section: datasource[indexPath.section])
 
         switch sectionData.type {
-        case .category, .universe :
-            viewModel.categorySelected = sectionData.elements[indexPath.row]
+        case .category:
+            viewModel.categorySelected = FilterViewModel.Category(rawValue: sectionData.elements[indexPath.row]) ?? .price
         case .rate:
             guard
                 let value = Int(sectionData.elements[indexPath.row])

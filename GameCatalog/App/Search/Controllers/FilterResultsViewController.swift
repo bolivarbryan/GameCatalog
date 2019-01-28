@@ -58,7 +58,7 @@ class FilterResultsViewController: UIViewController {
         }
         gameListView.allGamesCV.title = "Filtered"
         gameListView.delegate = self
-        gameListView.allGames = viewModel.filteredGames
+        gameListView.allGames = filtersViewModel.filterGames(from: viewModel.games)
     }
 }
 

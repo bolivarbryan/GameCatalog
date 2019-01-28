@@ -1,14 +1,54 @@
 import Foundation
 
 class FilterViewModel: CustomDebugStringConvertible {
+
+    enum Category: String {
+        case downloads = "Downloads"
+        case dateAdded = "Date added"
+        case price = "Price"
+    }
+
     static let minValue: Double = 19.99
     static let maxValue: Double = 199.99
 
-    var categorySelected: String? = nil
+    var categorySelected: Category = .price
     var priceRange: (Double, Double) = (FilterViewModel.minValue, FilterViewModel.maxValue)
     var ratesSelected: Set<Int> = []
     var universes: [String]
     var selectedUniverse: String?
+
+    func filterGames(from games: [Game]) -> [Game]{
+        var results = games
+
+        results = results
+            .filter({ $0.priceValue >= priceRange.0 })
+            .filter({ $0.priceValue <= priceRange.1 })
+            .filter({
+                guard
+                    let universe = selectedUniverse
+                    else { return true }
+                return $0.universe == universe
+            })
+            .filter({
+                guard
+                    ratesSelected.count > 0
+                    else { return true }
+                return ratesSelected.contains($0.rateValue)
+            })
+            .sorted(by: { (lhs, rhs) -> Bool in
+                switch categorySelected {
+                case .downloads:
+                    return lhs.downloadsValue >= rhs.downloadsValue
+                case .dateAdded:
+                    return lhs.createdDate >= rhs.createdDate
+                case .price:
+                    return lhs.priceValue >= rhs.priceValue
+                }
+            })
+
+
+        return results
+    }
 
     init(universes: [String]) {
         self.universes = universes
@@ -17,9 +57,9 @@ class FilterViewModel: CustomDebugStringConvertible {
     func addOrRemoveRateValue(_ newValue: Int) {
         switch ratesSelected.contains(newValue) {
         case true:
-            ratesSelected.remove(newValue)
+            ratesSelected.remove(6 - newValue)
         case false:
-            ratesSelected.insert(newValue)
+            ratesSelected.insert(6 - newValue)
         }
     }
 

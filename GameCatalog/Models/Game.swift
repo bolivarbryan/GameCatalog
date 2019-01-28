@@ -1,7 +1,8 @@
 import Foundation
 import UIKit
 
-class Game: Codable {
+class Game: Codable, CustomDebugStringConvertible {
+
     let objectID: String
     let name: String
     let createdAt: String
@@ -15,6 +16,18 @@ class Game: Codable {
     let sku: String
     let universe, kind: String
 
+    var priceValue: Double {
+        return Double(price.replacingOccurrences(of: ",", with: ".") ) ?? 0
+    }
+
+    var rateValue: Int {
+        return Int(rating) ?? 0
+    }
+
+    var downloadsValue: Int {
+        return Int(downloads) ?? 0
+    }
+
     var createdDate: Date {
         return GCDateFormatter.iso8601.formatter().date(from: createdAt) ?? Date(timeIntervalSince1970: 0)
     }
@@ -27,6 +40,10 @@ class Game: Codable {
         case name, createdAt, updatedAt, price, imageURL, popular, rating, downloads, description, universe, kind
         case objectID = "objectId"
         case sku = "SKU"
+    }
+
+    var debugDescription: String {
+        return "\(name) - price: \(priceValue) - rating: \(rateValue) - downloads:\(downloads) - created: \(createdAt)"
     }
 }
 

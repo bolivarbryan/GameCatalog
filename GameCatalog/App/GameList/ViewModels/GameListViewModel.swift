@@ -19,7 +19,7 @@ class GameListViewModel {
     static let allUniversesKey = "All"
     
     //MARK: - Properties
-    private var games: [Game] = [] {
+    var games: [Game] = [] {
         didSet {
             if selectedUniverse == GameListViewModel.allUniversesKey {
                 self.filteredGames = self.games
@@ -50,9 +50,7 @@ class GameListViewModel {
                 game1.createdDate < game2.createdDate
             })
 
-            let top = (gms.count > 5) ? 5 : (gms.count - 1)
-            guard top > 0 else { return }
-
+            let top = (gms.count > 5) ? 5 : (gms.count)
             newestGames = Array(gms[0...(top - 1)])
             mostPopularGames = filteredGames.filter({ $0.popular == true })
         }

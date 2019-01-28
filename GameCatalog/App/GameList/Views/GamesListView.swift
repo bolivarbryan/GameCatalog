@@ -44,22 +44,33 @@ class GamesListView: UIView {
             allGamesCV.games.value = allGames
             allGamesCV.collectionView.reloadData()
 
-            let calculatedHeight = mostPopularGamesCollectionView.bounds.height
-                + newestGamesCollectionView.bounds.height
+            var mostPopularSectionHeight: CGFloat = 0
+            var newestGamesSectionHeight: CGFloat = 0
+
+            if mostPopularGames.count > 0 {
+                mostPopularSectionHeight = 240
+            }
+
+            if newestGames.count > 0 {
+                newestGamesSectionHeight = 240
+            }
+
+            let calculatedHeight = mostPopularSectionHeight
+                + newestGamesSectionHeight
                 + self.allGamesCV.calculatedHeight
 
-            stackView.snp.updateConstraints ({
+            containerView.snp.updateConstraints ({
                 $0.height.equalTo( calculatedHeight )
             })
 
             scrollView.layoutSubviews()
-            stackView.updateConstraints()
+            containerView.updateConstraints()
             allGamesCV.collectionView.layoutIfNeeded()
         }
     }
 
     var delegate: GameListViewDelegate? = nil
-    private let stackView: UIView
+    private let containerView: UIView
     private let scrollView: UIScrollView
 
     let bag = DisposeBag()
@@ -68,7 +79,7 @@ class GamesListView: UIView {
     let allGamesCV = GameListItem(title: Language.allGames.localized(), direction: .vertical)
 
     override init(frame: CGRect) {
-        self.stackView = UIView(frame: .zero)
+        self.containerView = UIView(frame: .zero)
         self.scrollView = UIScrollView(frame: CGRect.zero)
         super.init(frame: .zero)
         self.clipsToBounds = true
@@ -91,8 +102,8 @@ class GamesListView: UIView {
         addSubview(scrollView)
         scrollView.snp.makeConstraints { $0.edges.equalToSuperview() }
 
-        scrollView.addSubview(stackView)
-        stackView.snp.makeConstraints {
+        scrollView.addSubview(containerView)
+        containerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.height.equalTo(600)
             $0.width.equalToSuperview()
@@ -100,7 +111,7 @@ class GamesListView: UIView {
     }
 
     func insertNewestGamesCollectionView() {
-        stackView.addSubview(newestGamesCollectionView)
+        containerView.addSubview(newestGamesCollectionView)
         newestGamesCollectionView.snp.makeConstraints({
             $0.top.right.left.equalToSuperview()
             $0.height.equalTo(200)
@@ -109,7 +120,7 @@ class GamesListView: UIView {
     }
 
     func insertMostPopularGamesCollectionView() {
-        stackView.addSubview(mostPopularGamesCollectionView)
+        containerView.addSubview(mostPopularGamesCollectionView)
         mostPopularGamesCollectionView.snp.makeConstraints({
             $0.top.equalTo(newestGamesCollectionView.snp.bottom)
             $0.right.left.equalToSuperview()
@@ -121,7 +132,7 @@ class GamesListView: UIView {
     }
 
     func insertAllGamesCollectionView() {
-        stackView.addSubview(allGamesCV)
+        containerView.addSubview(allGamesCV)
         allGamesCV.snp.makeConstraints {
             $0.top.equalTo(mostPopularGamesCollectionView.snp.bottom).offset(20)
             $0.right.left.bottom.equalToSuperview()
