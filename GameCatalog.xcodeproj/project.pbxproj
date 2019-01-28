@@ -42,6 +42,7 @@
 		F48FDD8C21FF7E0B008E568D /* UITableViewCell+Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48FDD8B21FF7E0B008E568D /* UITableViewCell+Separator.swift */; };
 		F48FDD8E21FF7E3C008E568D /* GCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48FDD8D21FF7E3C008E568D /* GCButton.swift */; };
 		F48FDD9021FF8208008E568D /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48FDD8F21FF8208008E568D /* FilterViewModel.swift */; };
+		F48FDD9221FF8E13008E568D /* FilterResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48FDD9121FF8E13008E568D /* FilterResultsViewController.swift */; };
 		F4E54ACA21ED39270088A32A /* GCDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E54AC921ED39270088A32A /* GCDateFormatter.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,7 @@
 		F48FDD8B21FF7E0B008E568D /* UITableViewCell+Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Separator.swift"; sourceTree = "<group>"; };
 		F48FDD8D21FF7E3C008E568D /* GCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCButton.swift; sourceTree = "<group>"; };
 		F48FDD8F21FF8208008E568D /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		F48FDD9121FF8E13008E568D /* FilterResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterResultsViewController.swift; sourceTree = "<group>"; };
 		F4E54AC921ED39270088A32A /* GCDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDateFormatter.swift; sourceTree = "<group>"; };
 		FAABB7A60B26642799B27367 /* Pods-GameCatalogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameCatalogUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GameCatalogUITests/Pods-GameCatalogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -252,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				F43F5ABD21F9B1940050FC82 /* FilterViewController.swift */,
+				F48FDD9121FF8E13008E568D /* FilterResultsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				F4298A6C21E4293200A306E6 /* GameListViewModel.swift in Sources */,
 				F462111921DEC63E00FA02DB /* AppDelegate.swift in Sources */,
 				F4298A6621E41A4A00A306E6 /* Game.swift in Sources */,
+				F48FDD9221FF8E13008E568D /* FilterResultsViewController.swift in Sources */,
 				F415D7D621FAF6C600A1B1F4 /* FilterSelectionTableViewCell.swift in Sources */,
 				F48FDD8E21FF7E3C008E568D /* GCButton.swift in Sources */,
 				F4298A6E21E54BC200A306E6 /* GameListViewController.swift in Sources */,

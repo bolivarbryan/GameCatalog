@@ -45,7 +45,7 @@ class GameListViewController: UIViewController {
 
         headerView.rightButton.rx.tap.asObservable()
             .subscribe(onNext:{ _ in
-                let vc = FilterViewController(universes: Array(self.viewModel.universes.value.dropFirst()))
+                let vc = FilterViewController(universes: Array(self.viewModel.universes.value.dropFirst()), gamesViewModel: self.viewModel)
                 let nc = UINavigationController(rootViewController: vc)
                 self.present(nc, animated: true, completion: nil)
             })

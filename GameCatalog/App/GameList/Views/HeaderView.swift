@@ -11,11 +11,14 @@ class HeaderView: UIView {
 
     enum NavigationAction {
         case filter
+        case clearFilter
 
         var image: UIImage {
             switch self {
             case .filter:
                 return #imageLiteral(resourceName: "navigationFilter")
+            default:
+                return UIImage()
             }
         }
     }
@@ -30,10 +33,18 @@ class HeaderView: UIView {
                                   family: .system)
 
         super.init(frame: CGRect.zero)
-        self.rightButton.setImage(rightAction.image, for: .normal)
+
+
+        switch rightAction {
+        case .clearFilter:
+            rightButton.setTitle("Clear filters", for: .normal)
+            rightButton.setTitleColor(GCStyleKit.fuschia, for: .normal)
+        case .filter:
+            self.rightButton.setImage(rightAction.image, for: .normal)
+        }
+
         self.titleLabel.text = title.localized()
         configureUI()
-        setupNavigationActions(rightAction: rightAction)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -56,13 +67,6 @@ class HeaderView: UIView {
         titleLabel.snp.makeConstraints {
             $0.left.equalToSuperview().offset(leftMargin)
             $0.centerY.equalToSuperview().offset(statusBarHeight)
-        }
-    }
-
-    private func setupNavigationActions(rightAction: NavigationAction) {
-        switch rightAction {
-        case .filter:
-            print("x")
         }
     }
 }

@@ -16,6 +16,7 @@ class FilterViewController: UIViewController {
     }
 
     let viewModel: FilterViewModel
+    let gamesViewModel: GameListViewModel
     let tableView: UITableView
     let bag = DisposeBag()
 
@@ -40,7 +41,8 @@ class FilterViewController: UIViewController {
         return button
     }
 
-    init(universes: [String]) {
+    init(universes: [String], gamesViewModel: GameListViewModel) {
+        self.gamesViewModel = gamesViewModel
         self.viewModel = FilterViewModel(universes: universes)
         tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
@@ -91,6 +93,9 @@ class FilterViewController: UIViewController {
         applyFilterButton.rx.tap.asObservable()
             .subscribe(onNext:{ _ in
                 print(self.viewModel)
+                let vc = FilterResultsViewController(gamesViewModel: self.gamesViewModel,
+                                                     filterViewModel: self.viewModel)
+                self.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: bag)
 
@@ -173,7 +178,7 @@ extension FilterViewController: UITableViewDelegate {
         let sectionData = generateSection(section: datasource[indexPath.section])
 
         switch sectionData.type {
-        case .category :
+        case .category, .universe :
             viewModel.categorySelected = sectionData.elements[indexPath.row]
         case .rate:
             guard
