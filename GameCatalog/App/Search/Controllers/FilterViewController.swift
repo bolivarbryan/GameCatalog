@@ -4,8 +4,6 @@ import RxSwift
 
 class FilterViewController: UIViewController {
 
-    var universes: [String] = ["Donkey Kong", "Zelda", "Mario"]
-
     enum FilterSection: String {
         case category
         case range
@@ -17,19 +15,7 @@ class FilterViewController: UIViewController {
         return [.category, .range, .rate, .universe]
     }
 
-    func generateSection(section: FilterSection) -> (type: FilterSection, elements: [String]) {
-        switch section {
-        case .category:
-            return (section, ["Downloads", "Date added", "Price"])
-        case .range:
-            return (section, [])
-        case .rate:
-            return (section, (1...5).map({"\($0)"}))
-        case .universe:
-            return (section, universes)
-        }
-    }
-
+    let viewModel: FilterViewModel
     let tableView: UITableView
     let bag = DisposeBag()
 
@@ -54,7 +40,8 @@ class FilterViewController: UIViewController {
         return button
     }
 
-    init() {
+    init(universes: [String]) {
+        self.viewModel = FilterViewModel(universes: universes)
         tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
         self.view.backgroundColor = .groupTableViewBackground
@@ -71,6 +58,20 @@ class FilterViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func generateSection(section: FilterSection) -> (type: FilterSection, elements: [String]) {
+        switch section {
+        case .category:
+            return (section, ["Downloads", "Date added", "Price"])
+        case .range:
+            return (section, [])
+        case .rate:
+            return (section, (1...5).map({"\($0)"}))
+        case .universe:
+            return (section, viewModel.universes)
+        }
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -78,18 +79,14 @@ class FilterViewController: UIViewController {
 
     func configureUI() {
         self.title = Language.filter.localized()
-        let applyFilterButton = UIButton(frame: .zero)
-        applyFilterButton.backgroundColor = GCStyleKit.fuschia
-        applyFilterButton.setTitle(Language.apply.localized().capitalized, for: .normal)
-        applyFilterButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+
+        let applyFilterButton = GCButton(title: Language.apply.localized().capitalized)
         view.addSubview(applyFilterButton)
         applyFilterButton.snp.makeConstraints({
-            $0.height.equalTo(44)
             $0.right.equalToSuperview().offset(-10)
             $0.left.equalToSuperview().offset(10)
             $0.bottom.equalToSuperview().offset(-32)
         })
-        applyFilterButton.layer.cornerRadius = 4
 
         view.addSubview(tableView)
         tableView.dataSource = self
@@ -118,6 +115,7 @@ extension FilterViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FilterSelectionTableViewCell
             cell.value = section.elements[indexPath.row]
             cell.checkmarkStyle = .circled
+            cell.contentStyle = .text
             cell.configureUI()
             return cell
         case .range:
@@ -138,6 +136,7 @@ extension FilterViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FilterSelectionTableViewCell
             cell.value = section.elements[indexPath.row]
             cell.checkmarkStyle = .circled
+            cell.contentStyle = .text
             cell.configureUI()
             return cell
         }
@@ -183,21 +182,15 @@ extension FilterViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        let sectionData = generateSection(section: datasource[indexPath.section])
+
+        if sectionData.type == .rate {
+            return indexPath
+        }
+
         tableView.indexPathsForSelectedRows?
-            .filter { $0.section == indexPath.section }
+            .filter { $0.section == indexPath.section}
             .forEach { tableView.deselectRow(at: $0, animated: true) }
         return indexPath
-    }
-}
-
-extension UITableViewCell {
-    func addSeparator() {
-        let line = UIView(frame: .zero)
-        addSubview(line)
-        line.backgroundColor = UIColor.groupTableViewBackground
-        line.snp.makeConstraints {
-            $0.height.equalTo(1)
-            $0.right.bottom.left.equalToSuperview()
-        }
     }
 }

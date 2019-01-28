@@ -39,6 +39,9 @@
 		F462113C21DEC63F00FA02DB /* GameCatalogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F462113B21DEC63F00FA02DB /* GameCatalogUITests.swift */; };
 		F470EEAB21EBF4F800035387 /* UICollectionView+FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F470EEAA21EBF4F800035387 /* UICollectionView+FlowLayout.swift */; };
 		F470EEAD21EC0C9500035387 /* GameListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F470EEAC21EC0C9500035387 /* GameListItem.swift */; };
+		F48FDD8C21FF7E0B008E568D /* UITableViewCell+Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48FDD8B21FF7E0B008E568D /* UITableViewCell+Separator.swift */; };
+		F48FDD8E21FF7E3C008E568D /* GCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48FDD8D21FF7E3C008E568D /* GCButton.swift */; };
+		F48FDD9021FF8208008E568D /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48FDD8F21FF8208008E568D /* FilterViewModel.swift */; };
 		F4E54ACA21ED39270088A32A /* GCDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E54AC921ED39270088A32A /* GCDateFormatter.swift */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +103,9 @@
 		F462113D21DEC63F00FA02DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F470EEAA21EBF4F800035387 /* UICollectionView+FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+FlowLayout.swift"; sourceTree = "<group>"; };
 		F470EEAC21EC0C9500035387 /* GameListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListItem.swift; sourceTree = "<group>"; };
+		F48FDD8B21FF7E0B008E568D /* UITableViewCell+Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Separator.swift"; sourceTree = "<group>"; };
+		F48FDD8D21FF7E3C008E568D /* GCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCButton.swift; sourceTree = "<group>"; };
+		F48FDD8F21FF8208008E568D /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		F4E54AC921ED39270088A32A /* GCDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDateFormatter.swift; sourceTree = "<group>"; };
 		FAABB7A60B26642799B27367 /* Pods-GameCatalogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameCatalogUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GameCatalogUITests/Pods-GameCatalogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +175,7 @@
 			children = (
 				F446FAF321E943590040815C /* UIView+Borders.swift */,
 				F470EEAA21EBF4F800035387 /* UICollectionView+FlowLayout.swift */,
+				F48FDD8B21FF7E0B008E568D /* UITableViewCell+Separator.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -177,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				F4618DDC21E68AD100997431 /* GCLabel.swift */,
+				F48FDD8D21FF7E3C008E568D /* GCButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -251,6 +259,7 @@
 		F4298A6221E4108E00A306E6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				F48FDD8F21FF8208008E568D /* FilterViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -576,7 +585,9 @@
 			files = (
 				F415D7DA21FAF6ED00A1B1F4 /* RateSelectionTableViewCell.swift in Sources */,
 				F4618DE921E6B38C00997431 /* GamesListView.swift in Sources */,
+				F48FDD9021FF8208008E568D /* FilterViewModel.swift in Sources */,
 				F470EEAD21EC0C9500035387 /* GameListItem.swift in Sources */,
+				F48FDD8C21FF7E0B008E568D /* UITableViewCell+Separator.swift in Sources */,
 				F4618DDB21E685FE00997431 /* HeaderView.swift in Sources */,
 				F4618DDD21E68AD100997431 /* GCLabel.swift in Sources */,
 				F446FAF421E943590040815C /* UIView+Borders.swift in Sources */,
@@ -588,6 +599,7 @@
 				F462111921DEC63E00FA02DB /* AppDelegate.swift in Sources */,
 				F4298A6621E41A4A00A306E6 /* Game.swift in Sources */,
 				F415D7D621FAF6C600A1B1F4 /* FilterSelectionTableViewCell.swift in Sources */,
+				F48FDD8E21FF7E3C008E568D /* GCButton.swift in Sources */,
 				F4298A6E21E54BC200A306E6 /* GameListViewController.swift in Sources */,
 				F43F5ABE21F9B1940050FC82 /* FilterViewController.swift in Sources */,
 				F4298A6921E41AFA00A306E6 /* API.swift in Sources */,
@@ -767,7 +779,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K87XPR878Y;
 				INFOPLIST_FILE = GameCatalog/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.APClient.GameCatalog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -783,7 +798,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K87XPR878Y;
 				INFOPLIST_FILE = GameCatalog/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.APClient.GameCatalog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -800,7 +818,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K87XPR878Y;
 				INFOPLIST_FILE = GameCatalogTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.APClient.GameCatalogTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -818,7 +840,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K87XPR878Y;
 				INFOPLIST_FILE = GameCatalogTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.APClient.GameCatalogTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -835,7 +861,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K87XPR878Y;
 				INFOPLIST_FILE = GameCatalogUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.APClient.GameCatalogUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -852,7 +882,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K87XPR878Y;
 				INFOPLIST_FILE = GameCatalogUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.APClient.GameCatalogUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

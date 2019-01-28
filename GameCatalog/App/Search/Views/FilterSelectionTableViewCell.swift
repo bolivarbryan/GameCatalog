@@ -58,6 +58,10 @@ class FilterSelectionTableViewCell: UITableViewCell {
         switch contentStyle {
         case .text:
             textLabel?.text = value
+            for s in subviews {
+                s.removeFromSuperview()
+            }
+            addSubview(textLabel!)
         case .rate:
             guard
                 let starsCount = Int(value)
