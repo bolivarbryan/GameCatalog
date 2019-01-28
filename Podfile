@@ -11,6 +11,7 @@ target 'GameCatalog' do
     pod "RxSwift"
     pod "Kingfisher"
     pod "Moya"
+    pod "RangeSeekSlider"
     
     target 'GameCatalogTests' do
         inherit! :search_paths

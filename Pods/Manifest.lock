@@ -6,6 +6,7 @@ PODS:
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
+  - RangeSeekSlider (1.7.0)
   - Result (3.2.4)
   - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
@@ -15,6 +16,7 @@ PODS:
 DEPENDENCIES:
   - Kingfisher
   - Moya
+  - RangeSeekSlider
   - RxCocoa
   - RxSwift
   - SnapKit
@@ -24,6 +26,7 @@ SPEC REPOS:
     - Alamofire
     - Kingfisher
     - Moya
+    - RangeSeekSlider
     - Result
     - RxCocoa
     - RxSwift
@@ -33,11 +36,12 @@ SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   Moya: a725035953bc1c0eb1be505ab903984501d82440
+  RangeSeekSlider: 0386c5a9aa5ebcb2fa5238e8a627280cf46c7c0a
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 46a8ab7a131a157fe3ce45e2f1cc64f87f8a640d
+PODFILE CHECKSUM: ab2bbf1d7ef5ac9c8d0b3d56b6c1eba18f81ee6d
 
 COCOAPODS: 1.5.3

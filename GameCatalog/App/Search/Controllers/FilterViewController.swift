@@ -80,6 +80,7 @@ class FilterViewController: UIViewController {
         self.title = Language.filter.localized()
         view.addSubview(tableView)
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -105,7 +106,7 @@ extension FilterViewController: UITableViewDataSource {
         case .range:
             let cellIdentifier = RangePickerTableViewCell.identifier
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RangePickerTableViewCell
-            cell.textLabel?.text = section.elements[indexPath.row] + " - " + section.elements[indexPath.row + 1]
+            cell.configureUI()
             return cell
         case .rate:
             let cellIdentifier = FilterSelectionTableViewCell.identifier
@@ -151,6 +152,17 @@ extension FilterViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return datasource[section].rawValue.capitalized
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let sectionData = generateSection(section: datasource[indexPath.section])
+
+        switch sectionData.type {
+        case .range:
+            return 74
+        default:
+            return UITableView.automaticDimension
+        }
     }
 
 }
