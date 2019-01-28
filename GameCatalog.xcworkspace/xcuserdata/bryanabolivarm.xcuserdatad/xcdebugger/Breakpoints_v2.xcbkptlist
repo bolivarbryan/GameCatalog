@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameCatalog/App/GameList/Controllers/GameListViewController.swift"
-            timestampString = "570097454.023738"
+            timestampString = "570386070.07007"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "GameListViewController"
             landmarkType = "21">
          </BreakpointContent>
@@ -184,11 +184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameCatalog/App/GameList/Controllers/GameListViewController.swift"
-            timestampString = "570097454.023856"
+            timestampString = "570386070.070214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "GameListViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -200,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameCatalog/App/Search/Controllers/FilterViewController.swift"
-            timestampString = "570097454.023911"
+            timestampString = "570386070.0702831"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>

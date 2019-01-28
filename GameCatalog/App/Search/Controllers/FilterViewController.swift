@@ -1,4 +1,6 @@
 import UIKit
+import RxCocoa
+import RxSwift
 
 class FilterViewController: UIViewController {
 
@@ -29,6 +31,28 @@ class FilterViewController: UIViewController {
     }
 
     let tableView: UITableView
+    let bag = DisposeBag()
+
+    var backButton: UIBarButtonItem {
+        let button = UIBarButtonItem(title: Language.close.localized().capitalized,
+                                         style: .plain,
+                                         target: self,
+                                         action: nil)
+
+        button.tintColor = GCStyleKit.fuschia
+        button.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold",
+                                                                               size: 17.0)!],
+                                          for: .normal)
+
+        button.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold",
+                                                                           size: 17.0)!],
+                                      for: .highlighted )
+        button.rx.tap.asObservable().subscribe(onNext:{ _ in
+            self.dismiss(animated: true, completion: nil)
+        })
+            .disposed(by: bag)
+        return button
+    }
 
     init() {
         tableView = UITableView(frame: .zero, style: .grouped)
@@ -59,7 +83,10 @@ class FilterViewController: UIViewController {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+
+        navigationItem.leftBarButtonItem = backButton
     }
+    
 }
 
 extension FilterViewController: UITableViewDataSource {
@@ -79,9 +106,12 @@ extension FilterViewController: UITableViewDataSource {
             cell.textLabel?.text = section.elements[indexPath.row] + " - " + section.elements[indexPath.row + 1]
             return cell
         case .rate:
-            let cellIdentifier = RateSelectionTableViewCell.identifier
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RateSelectionTableViewCell
-            cell.textLabel?.text = section.elements[indexPath.row]
+            let cellIdentifier = FilterSelectionTableViewCell.identifier
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FilterSelectionTableViewCell
+            cell.value = section.elements[indexPath.row]
+            cell.checkmarkStyle = .squared
+            cell.contentStyle = .rate
+            cell.configureUI()
             return cell
         case .universe:
             let cellIdentifier = FilterSelectionTableViewCell.identifier

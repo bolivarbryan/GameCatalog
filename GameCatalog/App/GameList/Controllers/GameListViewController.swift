@@ -46,7 +46,8 @@ class GameListViewController: UIViewController {
         headerView.rightButton.rx.tap.asObservable()
             .subscribe(onNext:{ _ in
                 let vc = FilterViewController()
-                self.present(vc, animated: true, completion: nil)
+                let nc = UINavigationController(rootViewController: vc)
+                self.present(nc, animated: true, completion: nil)
             })
         .disposed(by: bag)
 

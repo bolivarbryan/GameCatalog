@@ -7,7 +7,7 @@ enum Language: String {
     case allGames = "games.all"
     case filter = "filter"
     case downloads = "filter.downloads"
-
+    case close = "close"
 
     func localized() -> String {
         return NSLocalizedString(self.rawValue, comment: self.rawValue)
