@@ -55,9 +55,9 @@ class FilterViewController: UIViewController {
     }
 
     init() {
-        tableView = UITableView(frame: .zero, style: .grouped)
+        tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .groupTableViewBackground
 
         tableView.register(FilterSelectionTableViewCell.self,
                            forCellReuseIdentifier: FilterSelectionTableViewCell.identifier)
@@ -78,14 +78,31 @@ class FilterViewController: UIViewController {
 
     func configureUI() {
         self.title = Language.filter.localized()
+        let applyFilterButton = UIButton(frame: .zero)
+        applyFilterButton.backgroundColor = GCStyleKit.fuschia
+        applyFilterButton.setTitle(Language.apply.localized().capitalized, for: .normal)
+        applyFilterButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        view.addSubview(applyFilterButton)
+        applyFilterButton.snp.makeConstraints({
+            $0.height.equalTo(44)
+            $0.right.equalToSuperview().offset(-10)
+            $0.left.equalToSuperview().offset(10)
+            $0.bottom.equalToSuperview().offset(-32)
+        })
+        applyFilterButton.layer.cornerRadius = 4
+
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.right.left.equalToSuperview()
+            $0.bottom.equalTo(applyFilterButton.snp.top).offset(-17)
         }
         tableView.allowsMultipleSelection = true
         navigationItem.leftBarButtonItem = backButton
+        tableView.backgroundColor = .groupTableViewBackground
+        tableView.sectionHeaderHeight = 5
+        tableView.separatorStyle = .none
     }
     
 }
@@ -150,8 +167,8 @@ extension FilterViewController: UITableViewDelegate {
 
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return datasource[section].rawValue.capitalized
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -170,5 +187,17 @@ extension FilterViewController: UITableViewDelegate {
             .filter { $0.section == indexPath.section }
             .forEach { tableView.deselectRow(at: $0, animated: true) }
         return indexPath
+    }
+}
+
+extension UITableViewCell {
+    func addSeparator() {
+        let line = UIView(frame: .zero)
+        addSubview(line)
+        line.backgroundColor = UIColor.groupTableViewBackground
+        line.snp.makeConstraints {
+            $0.height.equalTo(1)
+            $0.right.bottom.left.equalToSuperview()
+        }
     }
 }

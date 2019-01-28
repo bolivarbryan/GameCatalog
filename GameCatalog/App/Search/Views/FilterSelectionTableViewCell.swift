@@ -77,7 +77,7 @@ class FilterSelectionTableViewCell: UITableViewCell {
             $0.centerY.equalToSuperview()
             $0.height.width.equalTo(17)
         })
-
+        addSeparator()
     }
 
     func addStars(value: Int) {
