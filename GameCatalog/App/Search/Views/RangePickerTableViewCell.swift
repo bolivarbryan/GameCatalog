@@ -4,6 +4,7 @@ import RangeSeekSlider
 class RangePickerTableViewCell: UITableViewCell {
 
     static let identifier = "RangePickerTableViewCell"
+    let slider = RangeSeekSlider(frame: .zero)
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -14,8 +15,12 @@ class RangePickerTableViewCell: UITableViewCell {
     }
 
     func configureUI() {
+
+        if subviews.contains(slider) {
+            return
+        }
+
         selectionStyle = .none
-        let slider = RangeSeekSlider(frame: .zero)
         slider.minValue = 19.99
         slider.maxValue = 199.99
         slider.lineHeight = 4
@@ -41,6 +46,7 @@ class RangePickerTableViewCell: UITableViewCell {
             $0.bottom.equalToSuperview().offset(10)
         })
     }
+
 }
 
 extension RangePickerTableViewCell: RangeSeekSliderDelegate {

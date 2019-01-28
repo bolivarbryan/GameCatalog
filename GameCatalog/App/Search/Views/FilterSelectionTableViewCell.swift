@@ -99,4 +99,5 @@ class FilterSelectionTableViewCell: UITableViewCell {
             }
         }
     }
+    
 }
