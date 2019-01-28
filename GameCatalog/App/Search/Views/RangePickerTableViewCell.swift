@@ -1,7 +1,6 @@
 import UIKit
 import RangeSeekSlider
 
-
 protocol RangePickerTableViewCellDelegate {
     func didSelectRange(range: (Double, Double))
 }

@@ -2,7 +2,7 @@ import Foundation
 
 class FilterViewModel: CustomDebugStringConvertible {
 
-    enum Category: String {
+    enum SortingMode: String {
         case downloads = "Downloads"
         case dateAdded = "Date added"
         case price = "Price"
@@ -11,7 +11,7 @@ class FilterViewModel: CustomDebugStringConvertible {
     static let minValue: Double = 19.99
     static let maxValue: Double = 199.99
 
-    var categorySelected: Category = .price
+    var categorySelected: SortingMode = .price
     var priceRange: (Double, Double) = (FilterViewModel.minValue, FilterViewModel.maxValue)
     var ratesSelected: Set<Int> = []
     var universes: [String]
@@ -45,7 +45,6 @@ class FilterViewModel: CustomDebugStringConvertible {
                     return lhs.priceValue >= rhs.priceValue
                 }
             })
-
 
         return results
     }
