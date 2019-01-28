@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1C4C746E0D19AB8DF625D725 /* Pods_GameCatalogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B46D250FCB665CE0537F39 /* Pods_GameCatalogTests.framework */; };
 		3D346023396363D199A53E8C /* Pods_GameCatalog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E39EB980CF077F407CFA6FF /* Pods_GameCatalog.framework */; };
+		6FBBEE7821FFBD9B005F66C1 /* GameDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBBEE7721FFBD9B005F66C1 /* GameDetailsViewController.swift */; };
 		97830412E2AF5055CB7F8BC6 /* Pods_GameCatalogUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20BE5BDDCE76ADE8CC8030F3 /* Pods_GameCatalogUITests.framework */; };
 		F415D7D621FAF6C600A1B1F4 /* FilterSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F415D7D521FAF6C600A1B1F4 /* FilterSelectionTableViewCell.swift */; };
 		F415D7D821FAF6D600A1B1F4 /* RangePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F415D7D721FAF6D600A1B1F4 /* RangePickerTableViewCell.swift */; };
@@ -71,6 +72,7 @@
 		38E082B5C946E5FA58AA9EE8 /* Pods-GameCatalogUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameCatalogUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GameCatalogUITests/Pods-GameCatalogUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4E39EB980CF077F407CFA6FF /* Pods_GameCatalog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GameCatalog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54B46D250FCB665CE0537F39 /* Pods_GameCatalogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GameCatalogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FBBEE7721FFBD9B005F66C1 /* GameDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsViewController.swift; sourceTree = "<group>"; };
 		C5AE3682E9EBE7B33121A54B /* Pods-GameCatalog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameCatalog.release.xcconfig"; path = "Pods/Target Support Files/Pods-GameCatalog/Pods-GameCatalog.release.xcconfig"; sourceTree = "<group>"; };
 		F415D7D521FAF6C600A1B1F4 /* FilterSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		F415D7D721FAF6D600A1B1F4 /* RangePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangePickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -140,6 +142,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6FBBEE7521FFBD7F005F66C1 /* GameDetails */ = {
+			isa = PBXGroup;
+			children = (
+				6FBBEE7621FFBD87005F66C1 /* Controllers */,
+			);
+			path = GameDetails;
+			sourceTree = "<group>";
+		};
+		6FBBEE7621FFBD87005F66C1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6FBBEE7721FFBD9B005F66C1 /* GameDetailsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		82E8185DBF4207C0654FFB43 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +184,7 @@
 		F4298A5821E4105000A306E6 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				6FBBEE7521FFBD7F005F66C1 /* GameDetails */,
 				F4298A5C21E4106B00A306E6 /* Search */,
 				F4298A5B21E4106600A306E6 /* GameList */,
 			);
@@ -587,6 +606,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F415D7DA21FAF6ED00A1B1F4 /* RateSelectionTableViewCell.swift in Sources */,
+				6FBBEE7821FFBD9B005F66C1 /* GameDetailsViewController.swift in Sources */,
 				F4618DE921E6B38C00997431 /* GamesListView.swift in Sources */,
 				F48FDD9021FF8208008E568D /* FilterViewModel.swift in Sources */,
 				F470EEAD21EC0C9500035387 /* GameListItem.swift in Sources */,

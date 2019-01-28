@@ -12,7 +12,7 @@ class FilterViewModel: CustomDebugStringConvertible {
     static let maxValue: Double = 199.99
 
     var categorySelected: Category = .price
-    var priceRange: (Double, Double) = (FilterViewModel.minValue, FilterViewModel.maxValue)
+    var priceRange: (min: Double, max: Double) = (min: FilterViewModel.minValue, max: FilterViewModel.maxValue)
     var ratesSelected: Set<Int> = []
     var universes: [String]
     var selectedUniverse: String?
@@ -21,8 +21,8 @@ class FilterViewModel: CustomDebugStringConvertible {
         var results = games
 
         results = results
-            .filter({ $0.priceValue >= priceRange.0 })
-            .filter({ $0.priceValue <= priceRange.1 })
+            .filter({ $0.priceValue >= priceRange.min })
+            .filter({ $0.priceValue <= priceRange.max })
             .filter({
                 guard
                     let universe = selectedUniverse
