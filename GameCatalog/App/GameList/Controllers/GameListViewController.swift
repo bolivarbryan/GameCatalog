@@ -88,6 +88,7 @@ extension GameListViewController: GameListViewModelDelegate {
 
 extension GameListViewController: GameListViewDelegate {
     func didSelectGame(game: Game) {
-        print(game.name)
+        let vc = GameDetailsViewController(game: game)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
