@@ -139,17 +139,49 @@ class GameDetailsViewController: UIViewController {
             $0.left.equalToSuperview().offset(29)
         }
         
-        let offset = 29
+        let starImage = #imageLiteral(resourceName: "star-on")
+        let starImageOff = #imageLiteral(resourceName: "star-off")
         
-        for i in (1...game.rateValue) {
-            let starImage = #imageLiteral(resourceName: "star")
-            let starImageView = UIImageView(image: starImage)
-            view.addSubview(starImageView)
+        let starsContainer = UIView(frame: .zero)
+        view.addSubview(starsContainer)
+        starsContainer.snp.makeConstraints {
+            $0.top.equalTo(downloadsLabel.snp.bottom).offset(5)
+            $0.left.equalTo(29)
+        }
+        
+        let offset = 22
+        for i in (0...4) {
+            let image = i <= game.rateValue ? starImage : starImageOff
+            let starImageView = UIImageView(image: image)
+            starsContainer.addSubview(starImageView)
             starImageView.snp.makeConstraints {
                 $0.left.equalToSuperview().offset(offset * i)
-                $0.top.equalTo(downloadsLabel.snp.bottom).offset(5)
+                $0.top.equalToSuperview()
                 $0.height.width.equalTo(16.5)
             }
+        }
+        
+        let priceContainer = UIView(frame: .zero)
+        view.addSubview(priceContainer)
+        priceContainer.snp.makeConstraints {
+            $0.height.equalTo(40)
+            $0.left.equalToSuperview().offset(29)
+            $0.top.equalTo(starsContainer.snp.bottom).offset(50)
+        }
+        priceContainer.layer.cornerRadius = 6.86
+        priceContainer.backgroundColor = .white
+        
+        let priceLabel = GCLabel(text: game.formattedPrice,
+                                 color: GCStyleKit.redSunset,
+                                 size: .section,
+                                 weight: .bold,
+                                 family: .system)
+        
+        priceContainer.addSubview(priceLabel)
+        priceLabel.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.left.equalToSuperview().offset(10)
+            $0.right.equalToSuperview().offset(-10)
         }
     }
     

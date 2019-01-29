@@ -19,6 +19,13 @@ class Game: Codable, CustomDebugStringConvertible {
     var priceValue: Double {
         return Double(price.replacingOccurrences(of: ",", with: ".") ) ?? 0
     }
+    
+    var formattedPrice: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        let number = NSNumber(value: priceValue)
+        return formatter.string(from: number)!
+    }
 
     var rateValue: Int {
         return Int(rating) ?? 0
