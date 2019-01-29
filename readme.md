@@ -3,6 +3,8 @@
 
 This Client fetches a videogames catalog where you can see prices, newest ones and also filter them.
 
+![](record.gif)
+
 ## App Architecture
 
 - This Project was built with **MVVM** Architecture using **Reactive Patterns**
