@@ -18,7 +18,7 @@ This Client fetches a videogames catalog where you can see prices, newest ones a
 - **Kingfisher**: Image dowloader client (https://github.com/onevcat/Kingfisher)
 - **RxSwift**: Implementation of reactive patterns in app (https://github.com/ReactiveX/RxSwift)
 - **Couchbase**: Used for data persistence.
-- 
+
 ## Flow Diagram
 
 ![](fetchGamesDiagram.png)
