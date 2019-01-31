@@ -24,3 +24,19 @@ target 'GameCatalog' do
     end
     
 end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if ["Kingfisher", "RxSwift", "RxCocoa", "Moya", "SnapKit"].include? target.name
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.0'
+            end
+        end
+
+        if ["RangeSeekSlider", "CouchbaseLite-Swift"].include? target.name
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '3.2'
+            end
+        end
+    end
+end

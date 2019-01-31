@@ -19,6 +19,9 @@
 		F4298A6A21E41E1A00A306E6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4298A6821E41AFA00A306E6 /* API.swift */; };
 		F4298A6C21E4293200A306E6 /* GameListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4298A6B21E4293200A306E6 /* GameListViewModel.swift */; };
 		F4298A6E21E54BC200A306E6 /* GameListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4298A6D21E54BC200A306E6 /* GameListViewController.swift */; };
+		F42EF6AA22028D2300976CD1 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42EF6A922028D2300976CD1 /* DatabaseManager.swift */; };
+		F42EF6B12202900000976CD1 /* CouchbaseLiteSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42EF6B02202900000976CD1 /* CouchbaseLiteSwift.framework */; };
+		F42EF6B22202900000976CD1 /* CouchbaseLiteSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F42EF6B02202900000976CD1 /* CouchbaseLiteSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F43F5ABE21F9B1940050FC82 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F5ABD21F9B1940050FC82 /* FilterViewController.swift */; };
 		F446FAF221E93A4D0040815C /* GameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F446FAF121E93A4D0040815C /* GameCollectionViewCell.swift */; };
 		F446FAF421E943590040815C /* UIView+Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F446FAF321E943590040815C /* UIView+Borders.swift */; };
@@ -33,7 +36,6 @@
 		F4618DE621E6ADC400997431 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4618DE521E6ADC400997431 /* CategoryCollectionViewCell.swift */; };
 		F4618DE921E6B38C00997431 /* GamesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4618DE821E6B38C00997431 /* GamesListView.swift */; };
 		F462111921DEC63E00FA02DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F462111821DEC63E00FA02DB /* AppDelegate.swift */; };
-		F462112121DEC63E00FA02DB /* GameCatalog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F462111F21DEC63E00FA02DB /* GameCatalog.xcdatamodeld */; };
 		F462112321DEC63F00FA02DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F462112221DEC63F00FA02DB /* Assets.xcassets */; };
 		F462112621DEC63F00FA02DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F462112421DEC63F00FA02DB /* LaunchScreen.storyboard */; };
 		F462113121DEC63F00FA02DB /* GameCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F462113021DEC63F00FA02DB /* GameCatalogTests.swift */; };
@@ -64,6 +66,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		F42EF6AF22028F9400976CD1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F42EF6B22202900000976CD1 /* CouchbaseLiteSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		07E2098F9E3721EA8C9127C9 /* Pods-GameCatalogTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameCatalogTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GameCatalogTests/Pods-GameCatalogTests.release.xcconfig"; sourceTree = "<group>"; };
 		0A92ECA7C4B2EE03E3452325 /* Pods-GameCatalogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameCatalogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GameCatalogTests/Pods-GameCatalogTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -81,6 +97,8 @@
 		F4298A6821E41AFA00A306E6 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		F4298A6B21E4293200A306E6 /* GameListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListViewModel.swift; sourceTree = "<group>"; };
 		F4298A6D21E54BC200A306E6 /* GameListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListViewController.swift; sourceTree = "<group>"; };
+		F42EF6A922028D2300976CD1 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		F42EF6B02202900000976CD1 /* CouchbaseLiteSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CouchbaseLiteSwift.framework; sourceTree = "<group>"; };
 		F43F5ABD21F9B1940050FC82 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		F446FAF121E93A4D0040815C /* GameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewCell.swift; sourceTree = "<group>"; };
 		F446FAF321E943590040815C /* UIView+Borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Borders.swift"; sourceTree = "<group>"; };
@@ -94,7 +112,6 @@
 		F4618DE821E6B38C00997431 /* GamesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesListView.swift; sourceTree = "<group>"; };
 		F462111521DEC63E00FA02DB /* GameCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F462111821DEC63E00FA02DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F462112021DEC63E00FA02DB /* GameCatalog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameCatalog.xcdatamodel; sourceTree = "<group>"; };
 		F462112221DEC63F00FA02DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F462112521DEC63F00FA02DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F462112721DEC63F00FA02DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F42EF6B12202900000976CD1 /* CouchbaseLiteSwift.framework in Frameworks */,
 				3D346023396363D199A53E8C /* Pods_GameCatalog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +179,7 @@
 		82E8185DBF4207C0654FFB43 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F42EF6B02202900000976CD1 /* CouchbaseLiteSwift.framework */,
 				4E39EB980CF077F407CFA6FF /* Pods_GameCatalog.framework */,
 				54B46D250FCB665CE0537F39 /* Pods_GameCatalogTests.framework */,
 				20BE5BDDCE76ADE8CC8030F3 /* Pods_GameCatalogUITests.framework */,
@@ -313,6 +332,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		F42EF6A822028CC000976CD1 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				F42EF6A922028D2300976CD1 /* DatabaseManager.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		F462110C21DEC63E00FA02DB = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +365,7 @@
 		F462111721DEC63E00FA02DB /* GameCatalog */ = {
 			isa = PBXGroup;
 			children = (
+				F42EF6A822028CC000976CD1 /* Database */,
 				F4E54AC821ED39110088A32A /* Helpers */,
 				F4298A6721E41A9300A306E6 /* Services */,
 				F4298A6421E41A3F00A306E6 /* Models */,
@@ -348,7 +376,6 @@
 				F462112221DEC63F00FA02DB /* Assets.xcassets */,
 				F462112421DEC63F00FA02DB /* LaunchScreen.storyboard */,
 				F462112721DEC63F00FA02DB /* Info.plist */,
-				F462111F21DEC63E00FA02DB /* GameCatalog.xcdatamodeld */,
 			);
 			path = GameCatalog;
 			sourceTree = "<group>";
@@ -391,6 +418,7 @@
 				F462111221DEC63E00FA02DB /* Frameworks */,
 				F462111321DEC63E00FA02DB /* Resources */,
 				593174A663CB41547DBB1A5A /* [CP] Embed Pods Frameworks */,
+				F42EF6AF22028F9400976CD1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -614,7 +642,6 @@
 				F4618DDB21E685FE00997431 /* HeaderView.swift in Sources */,
 				F4618DDD21E68AD100997431 /* GCLabel.swift in Sources */,
 				F446FAF421E943590040815C /* UIView+Borders.swift in Sources */,
-				F462112121DEC63E00FA02DB /* GameCatalog.xcdatamodeld in Sources */,
 				F4618DD921E6836000997431 /* Language.swift in Sources */,
 				F470EEAB21EBF4F800035387 /* UICollectionView+FlowLayout.swift in Sources */,
 				F4E54ACA21ED39270088A32A /* GCDateFormatter.swift in Sources */,
@@ -632,6 +659,7 @@
 				F4618DE121E6944900997431 /* GCStyleKit.swift in Sources */,
 				F415D7D821FAF6D600A1B1F4 /* RangePickerTableViewCell.swift in Sources */,
 				F4618DDF21E6928000997431 /* CategoriesListView.swift in Sources */,
+				F42EF6AA22028D2300976CD1 /* DatabaseManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,6 +830,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K87XPR878Y;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = GameCatalog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -821,6 +853,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K87XPR878Y;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = GameCatalog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -959,19 +995,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		F462111F21DEC63E00FA02DB /* GameCatalog.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				F462112021DEC63E00FA02DB /* GameCatalog.xcdatamodel */,
-			);
-			currentVersion = F462112021DEC63E00FA02DB /* GameCatalog.xcdatamodel */;
-			path = GameCatalog.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = F462110D21DEC63E00FA02DB /* Project object */;
 }

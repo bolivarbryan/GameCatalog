@@ -2,6 +2,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 import Moya
+import CouchbaseLiteSwift
 
 enum GameSection {
     case newest
@@ -39,12 +40,20 @@ class GameListViewModel {
             universesObject.append(contentsOf: sortedNames )
 
             universes.value = universesObject
-
+            delegate?.didFetch()
         }
     }
 
     var filteredGames: [Game] = [] {
         didSet {
+            guard
+                filteredGames.count >= 1
+            else {
+                newestGames = []
+                mostPopularGames = []
+                return
+            }
+
             //newest games
             let gms = filteredGames.sorted(by: { (game1, game2) -> Bool in
                 game1.createdDate < game2.createdDate
@@ -73,6 +82,8 @@ class GameListViewModel {
     }
 
     func fetchGames() {
+        loadGamesFromLocalDatabase()
+
         let provider = MoyaProvider<ApiService>()
         provider.request(.gameList) { (result) in
             switch result {
@@ -80,11 +91,11 @@ class GameListViewModel {
                 let data = moyaResponse.data
                 do {
                     let games = try JSONDecoder().decode(Games.self, from: data)
-                    self.games = games.results
+                    self.storeGamesInLocalDatabase(newGames: games.results)
+                    self.loadGamesFromLocalDatabase()
                 } catch {
                     print(error.localizedDescription)
                 }
-                self.delegate?.didFetch()
             case let .failure(error):
                 print(error.localizedDescription)
             }
@@ -98,4 +109,49 @@ class GameListViewModel {
         })
         delegate?.didFetch()
     }
+
+    func storeGamesInLocalDatabase(newGames: [Game]) {
+        try? DatabaseManager.shared.database.inBatch {
+            for game in newGames {
+                switch games.contains(game) {
+                case true:
+                    continue
+                case false:
+                    try? DatabaseManager.shared.database.saveDocument(game.mutableDocument)
+                }
+
+            }
+        }
+    }
+
+    func loadGamesFromLocalDatabase() {
+        let query = QueryBuilder
+            .select(
+                SelectResult.expression(Meta.id),
+                SelectResult.property("objectId"),
+                SelectResult.property("name"),
+                SelectResult.property("createdAt"),
+                SelectResult.property("updatedAt"),
+                SelectResult.property("price"),
+                SelectResult.property("imageURL"),
+                SelectResult.property("popular"),
+                SelectResult.property("rating"),
+                SelectResult.property("downloads"),
+                SelectResult.property("description"),
+                SelectResult.property("SKU"),
+                SelectResult.property("universe"),
+                SelectResult.property("kind")
+            )
+            .from(DataSource.database(DatabaseManager.shared.database))
+        do {
+            var games: [Game] = []
+            for result in try query.execute() {
+                games.append(Game(from: result))
+            }
+            self.games = games
+        } catch {
+            print(error)
+        }
+    }
+
 }
