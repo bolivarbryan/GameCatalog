@@ -9,7 +9,7 @@ This Client fetches a videogames catalog where you can see prices, newest ones a
 
 - This Project was built with **MVVM** Architecture using **Reactive Patterns**
 - In order to implement a precise layout this client uses an Dependency called **Snapkit** ([https://blog.pusher.com/mvvm-ios/]()).
-- Included **CoreData** as Persistency Manager
+- Included **Couchbase** as Persistency Manager
 - Using XCTest for Unit Tests
 
 ## Dependencies (Using CocoaPods)
@@ -17,7 +17,8 @@ This Client fetches a videogames catalog where you can see prices, newest ones a
 - **Moya**: Used for creating a Networking layer (https://github.com/Moya/Moya])
 - **Kingfisher**: Image dowloader client (https://github.com/onevcat/Kingfisher)
 - **RxSwift**: Implementation of reactive patterns in app (https://github.com/ReactiveX/RxSwift)
-
+- **Couchbase**: Used for data persistence.
+- 
 ## Flow Diagram
 
 ![](fetchGamesDiagram.png)
@@ -31,7 +32,7 @@ This Client fetches a videogames catalog where you can see prices, newest ones a
 - [x] Create & Test Models
 - [x] Create Networking Layer
 - [x] Create Game List Controller with Layout
-- [ ] (**GameList, Data Persistence**) Connect Database with View Model Controller & Test
+- [x] (**GameList, Data Persistence**) Connect Database with View Model Controller & Test
 - [x] (**GameList, Networking layer**) Connect Networking layer with Database and update once data is fetched
 - [x] (**GameList**) Implement Filtering by Specific Game Brand
 - [x] Create Game Details View Controller with Layout
